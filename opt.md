@@ -94,7 +94,7 @@ end
 
 ### Small image
 
-![Octocat](https://pheidippidesbane.github.io/Projects/pictures/Picture1.png)
+![Octocat](https://pheidippidesbane.github.io/Projects/images/Picture1.png)
 
 ### Large image
 
