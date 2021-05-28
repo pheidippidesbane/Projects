@@ -11,6 +11,8 @@ Whenever you commit to this repository, GitHub Pages will run [Jekyll](https://j
 ### Here are some projects I have been working on:
 
 [Optimised Portfolio Tool](./opt.html)
+[Example Formatty Thing](./example.html)
+[Backtesting some financy thing](.backtest.html)
 
 <!---
 Markdown is a lightweight and easy-to-use syntax for styling your writing. It includes conventions for
