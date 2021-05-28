@@ -1,4 +1,4 @@
-## Welcome to Pheidippides' Bane's Website
+## Welcome to My Website!
 
 <!--- You can use the [editor on GitHub](https://github.com/pheidippidesbane/sitetwo/edit/gh-pages/index.md) to maintain and preview the content for your website in Markdown files.
 
