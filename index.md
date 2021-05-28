@@ -14,7 +14,7 @@ Whenever you commit to this repository, GitHub Pages will run [Jekyll](https://j
 
 [Example Formatty Thing](./example.html)
 
-[Backtesting some financy thing](.backtest.html)
+[Backtesting some financy thing](./backtest.html)
 
 <!---
 Markdown is a lightweight and easy-to-use syntax for styling your writing. It includes conventions for
