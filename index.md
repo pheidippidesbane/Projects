@@ -5,7 +5,10 @@
 Whenever you commit to this repository, GitHub Pages will run [Jekyll](https://jekyllrb.com/) to rebuild the pages in your site, from the content in your Markdown files.
 -->
 
-### Here is a list of projects I have been working on
+### Here is my LinkedIn Page:
+[LinkedIn](https://www.linkedin.com/in/hrhart)
+
+### Here are some projects I have been working on:
 
 [Optimised Portfolio Tool](./opt.html)
 
