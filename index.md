@@ -1,6 +1,5 @@
 ## Welcome to My Website!
 
-<p align="center"> <img src="https://pheidippidesbane.github.io/Projects/images/android-chrome-256x256.png" alt="Antlers"> </p>
 
 <!--- You can use the [editor on GitHub](https://github.com/pheidippidesbane/sitetwo/edit/gh-pages/index.md) to maintain and preview the content for your website in Markdown files.
 
@@ -19,6 +18,9 @@ Whenever you commit to this repository, GitHub Pages will run [Jekyll](https://j
 [Optimised Portfolio Tool](./opt.html)
 
 [Big Chainrings](./chainring.html)
+
+
+<p align="center"> <img src="https://pheidippidesbane.github.io/Projects/images/android-chrome-256x256.png" alt="Antlers"> </p>
 
 <!---
 [Example Formatty Thing](./example.html)
