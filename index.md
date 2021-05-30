@@ -1,5 +1,7 @@
 ## Welcome to My Website!
 
+<p align="center"> <img src="https://pheidippidesbane.github.io/Projects/images/android-chrome-256x256.png" alt="Antlers"> </p>
+
 <!--- You can use the [editor on GitHub](https://github.com/pheidippidesbane/sitetwo/edit/gh-pages/index.md) to maintain and preview the content for your website in Markdown files.
 
 Whenever you commit to this repository, GitHub Pages will run [Jekyll](https://jekyllrb.com/) to rebuild the pages in your site, from the content in your Markdown files.
