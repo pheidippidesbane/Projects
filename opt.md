@@ -6,6 +6,8 @@ layout: default
 
 # Optimised Portfolio Tool
 
+
+
 Let's say you are an investor.
 
 You have a universe of stocks that you are considering for investment.
@@ -16,7 +18,11 @@ Cheap stocks are probably cheap because they deserve to be cheap, i.e. they are 
 
 Expensive stocks are probably expensive because they're going to be the next AAPL, like TSLA.
 
+
+
 ## Investing in the Index
+
+
 
 Why don't you just invest in the index? It has a number of advantages:
 
@@ -26,7 +32,11 @@ Why don't you just invest in the index? It has a number of advantages:
 
 However, given an index of stocks, it seems very unlikely that the optimal weighting of securities just happens to be exactly the same as the weighting by order of market capitalisation (or whatever methodology the index provider uses). Surely you want to diversify _better_.
 
+
+
 ## Diversifying
+
+
 
 How do you diversify _better_?
 
@@ -36,7 +46,11 @@ For a start, maybe you don't want to go all in on the S&P500 which is heavily do
 
 I will show you a tool that I have made that uses some assumptions to chose the optimal portfolio weights given a universe of stocks.
 
+
+
 ## The Tool
+
+
 
 This tool requires a number of assumptions for validity:
 
@@ -346,6 +360,30 @@ plt.grid(True)
 plt.savefig('PATH\\PORTFOLIO.png')
 
 ```
+
+## So what does this tool actually do?
+
+
+Basically the tool iterates over a variety of possible portfolio weightings and calculates the expected return and volatility of the portfolio given a modelled relationship between the two.
+
+Initially, if chooses a number of random weightings in order to expose the cases where the optimisation has found a bad local maximum.
+
+The second half of the iteration uses stochastic gradient descent to optimise portfolio weights for maximum Sharpe ratio (shown in a different colour in _figure 1)
+
+![Modern Portfolio Theory](https://pheidippidesbane.github.io/Projects/images/MPT.png)
+_figure 1_
+
+![Porfolio](https://pheidippidesbane.github.io/Projects/images/PORTFOLIO.png)
+_figure 2_
+
+![Descent](https://pheidippidesbane.github.io/Projects/images/DESCENT.png)
+_figure 3_
+
+![Sharpe Descent](https://pheidippidesbane.github.io/Projects/images/SHARPE_DESCENT.png)
+_figure 4_
+
+![Weights](https://pheidippidesbane.github.io/Projects/images/WEIGHTS.png)
+_figure 5_
 
 <!---
 Text can be **bold**, _italic_, or ~~strikethrough~~.
