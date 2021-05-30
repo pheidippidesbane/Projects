@@ -27,7 +27,7 @@ Consider the simple bicycle model in _Figure 1_:
   
 You are doing a full gas time trial. Therefore:
 
-![equation] <a href="https://www.codecogs.com/eqnedit.php?latex=\hat{\beta}&space;=&space;\frac{Cov(R_{stock},&space;R_{market})}{Var(R_{market})}" target="_blank"><img src="https://latex.codecogs.com/gif.latex?\hat{\beta}&space;=&space;\frac{Cov(R_{stock},&space;R_{market})}{Var(R_{market})}" title="\hat{\beta} = \frac{Cov(R_{stock}, R_{market})}{Var(R_{market})}" /></a>
+![equation] <a align = "centre" href="https://www.codecogs.com/eqnedit.php?latex=\hat{\beta}&space;=&space;\frac{Cov(R_{stock},&space;R_{market})}{Var(R_{market})}" target="_blank"><img src="https://latex.codecogs.com/gif.latex?\hat{\beta}&space;=&space;\frac{Cov(R_{stock},&space;R_{market})}{Var(R_{market})}" title="\hat{\beta} = \frac{Cov(R_{stock}, R_{market})}{Var(R_{market})}" /></a>
 
 <p>
 <math>
