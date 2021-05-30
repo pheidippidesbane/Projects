@@ -29,6 +29,8 @@ layout: default
   
 $ x^2 / y^2 * int(x^2) $
 
+<MATH>&int;_a_^b^{f(x)<over>1+x} dx</MATH>    
+    
 Text can be **bold**, _italic_, or ~~strikethrough~~.
 
 [Link to another page](./another-page.html).
