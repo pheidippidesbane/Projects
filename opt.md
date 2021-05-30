@@ -16,7 +16,7 @@ You are a believer in the efficient market hypothesis, to an extent.
 
 Cheap stocks are probably cheap because they deserve to be cheap, i.e. they are destined for the dustbin of history, like XOM.
 
-Expensive stocks are probably expensive because they're going to be the next AAPL, like TSLA.
+Expensive stocks are probably expensive because they're going to be the next AAPL or TSLA.
 
 
 
