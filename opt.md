@@ -403,7 +403,7 @@ The expected volatility of the portfolio can be estimated by generating a covari
 <p align="center"> <i> Figure 6: Historical performance of stocks in universe relative to their mean. </i> </p>
 
 
-_Note that this tool considers asset prices' covariances when currency hedged, i.e. you sell the foreign currency future when buying the foreign asset, and vice versa. To consider the optimal amount of currency hedging, one could include currency pairs as an asset in the model_
+_Note that this tool considers asset prices' covariances when currency hedged, i.e. you sell the foreign currency future when buying the foreign asset, and vice versa. To consider the optimal amount of currency hedging, one could include currency pairs as an asset in the model._
 
 <!---
 Text can be **bold**, _italic_, or ~~strikethrough~~.
