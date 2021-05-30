@@ -390,6 +390,10 @@ _figure 4_
 
 _figure 5_
 
+![All Stocks](https://pheidippidesbane.github.io/Projects/images/ALLSTOCKS.png)
+
+_figure 6_
+
 <!---
 Text can be **bold**, _italic_, or ~~strikethrough~~.
 
