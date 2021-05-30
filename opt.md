@@ -2,8 +2,31 @@
 layout: default
 ---
 
-
 [Home](./index.html)
+
+# Optimised Portfolio Tool
+
+Let's say you are an investor.
+
+You have a universe of stocks that you are considering for investment.
+
+You are a believer in the efficient market hypothesis, to an extent.
+
+Cheap stocks are probably cheap because they deserve to be cheap, i.e. they are destined for the dustbin of history, like XOM.
+
+Expensive stocks are probably expensive because they're going to be the next AAPL, like TSLA.
+
+Why don't you just invest in the index? It has a number of advantages:
+
+1. Simple and easy.
+2. Usually pretty cheap in terms of management fees (index ETFs typically have an expense ratio around 10bps annually).
+3. Probably going to have similar asset returns to any hegde fund strategy if your an efficient market hypothesis believer (which is somewhat self defeating if you think about it; why would an efficient market keep paying PMs' salaries?).
+
+However, given an index of stocks, it seems very unlikely that the optimal weighting of securities just happens to be exactly the same as the weighting by order of market capitalisation (or whatever methodology the index provider uses). Surely you want to diversify _better_.
+
+How do you diversify _better_?
+
+For a start, maybe you don't want to go all in on the S&P500 which is heavily dominated by big tech stocks. You probably want to weight stocks so that anti-correlated stocks offset eachother.
 
 <!---
 Text can be **bold**, _italic_, or ~~strikethrough~~.
