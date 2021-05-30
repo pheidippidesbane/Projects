@@ -1,10 +1,3 @@
----
-layout: default
----
-
-
-[Home](./index.html).
-
 <style TYPE="text/css">
 code.has-jax {font: inherit; font-size: 100%; background: inherit; border: inherit;}
 </style>
@@ -23,6 +16,15 @@ MathJax.Hub.Queue(function() {
 });
 </script>
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.4/MathJax.js?config=TeX-AMS_HTML-full"></script>
+
+---
+layout: default
+---
+
+
+[Home](./index.html).
+
+
   
   
 $ x^2 / y^2 * int(x^2) $
