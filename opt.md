@@ -397,7 +397,7 @@ The expected volatility of the portfolio can be estimated by generating a covari
 <p align="center"> <i> Figure 4: Development of portfolio Sharpe Ratio. </i> </p>
 
 <p align="center"> <img src="https://pheidippidesbane.github.io/Projects/images/WEIGHTS.png" alt="Weights"> </p>
-<p align="center"> <i> Figure 5: Tested portfolio weights and optimal weights (colour). </i> </p>
+<p align="center"> <i> Figure 5: Tested portfolio weights and optimal weights (Blue). </i> </p>
 
 <p align="center"> <img src="https://pheidippidesbane.github.io/Projects/images/ALLSTOCKS.png" alt="All Stocks"> </p>
 <p align="center"> <i> Figure 6: Historical performance of stocks in universe relative to their mean. </i> </p>
