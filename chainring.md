@@ -22,7 +22,7 @@ Now we see that the situation is not so simple after all.
 Consider the simple bicycle model in _Figure 1_:
 
 <p align="center"> <img src="https://pheidippidesbane.github.io/Projects/images/Torque.jpg" alt="Model" width="400" 
-     height="200"> </p>
+     height="250"> </p>
 <p align="center"> <i> Figure 1: Simple bicycle model. </i> </p>
   
 You are doing a full gas time trial. Therefore:
