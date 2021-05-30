@@ -368,31 +368,25 @@ Basically the tool iterates over a variety of possible portfolio weightings and 
 
 Initially, if chooses a number of random weightings in order to expose the cases where the optimisation has found a bad local maximum.
 
-The second half of the iteration uses stochastic gradient descent to optimise portfolio weights for maximum Sharpe ratio (shown in blue in _Figure 1_)
+The second half of the iteration uses stochastic gradient descent to optimise portfolio weights for maximum Sharpe ratio (shown in blue in _Figure 1_).
 
 <p align="center"> <img src="https://pheidippidesbane.github.io/Projects/images/MPT.png" alt="Modern Portfolio Theory"> </p>
+<p align="center"> <i> Figure 1: Modelled risk-return profiles of randomly weighted (red) and progressively optimised (blue) portfolios. </i> </p>
 
-<p align="center"> <i> Figure 1:  </i> </p>
+<p align="center"> <img src="https://pheidippidesbane.github.io/Projects/images/PORTFOLIO.png" alt="Porfolio"> </p>
+<p align="center"> <i> Figure 2: Historical performance of portfolio using optimised weights. </i> </p>
 
-![Porfolio](https://pheidippidesbane.github.io/Projects/images/PORTFOLIO.png)
+<p align="center"> <img src="https://pheidippidesbane.github.io/Projects/images/DESCENT.png" alt="Descent"> </p>
+<p align="center"> <i> Figure 3: Development of portfolio expectation and volatility. </i> </p>
 
-_figure 2_
+<p align="center"> <img src="https://pheidippidesbane.github.io/Projects/images/SHARPE_DESCENT.png" alt="Sharpe Descent"> </p>
+<p align="center"> <i> Figure 4: Development of portfolio Sharpe Ratio. </i> </p>
 
-![Descent](https://pheidippidesbane.github.io/Projects/images/DESCENT.png)
+<p align="center"> <img src="https://pheidippidesbane.github.io/Projects/images/WEIGHTS.png" alt="Weights"> </p>
+<p align="center"> <i> Figure 5: Tested portfolio weights and optimal weights (colour). </i> </p>
 
-_figure 3_
-
-![Sharpe Descent](https://pheidippidesbane.github.io/Projects/images/SHARPE_DESCENT.png)
-
-_figure 4_
-
-![Weights](https://pheidippidesbane.github.io/Projects/images/WEIGHTS.png)
-
-_figure 5_
-
-![All Stocks](https://pheidippidesbane.github.io/Projects/images/ALLSTOCKS.png)
-
-_figure 6_
+<p align="center"> <img src="https://pheidippidesbane.github.io/Projects/images/ALLSTOCKS.png" alt="All Stocks"> </p>
+<p align="center"> <i> Figure 6: Historical performance of stocks in universe relative to their mean. </i> </p>
 
 <!---
 Text can be **bold**, _italic_, or ~~strikethrough~~.
