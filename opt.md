@@ -372,7 +372,7 @@ The second half of the iteration uses stochastic gradient descent to optimise po
 
 ![Modern Portfolio Theory](https://pheidippidesbane.github.io/Projects/images/MPT.png)
 
-_figure 1_
+<p style="text-align: center;"> _figure 1_ </p>
 
 ![Porfolio](https://pheidippidesbane.github.io/Projects/images/PORTFOLIO.png)
 
