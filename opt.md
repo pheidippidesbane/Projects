@@ -368,21 +368,26 @@ Basically the tool iterates over a variety of possible portfolio weightings and 
 
 Initially, if chooses a number of random weightings in order to expose the cases where the optimisation has found a bad local maximum.
 
-The second half of the iteration uses stochastic gradient descent to optimise portfolio weights for maximum Sharpe ratio (shown in a different colour in _figure 1)
+The second half of the iteration uses stochastic gradient descent to optimise portfolio weights for maximum Sharpe ratio (shown in blue in _figure 1_)
 
 ![Modern Portfolio Theory](https://pheidippidesbane.github.io/Projects/images/MPT.png)
+
 _figure 1_
 
 ![Porfolio](https://pheidippidesbane.github.io/Projects/images/PORTFOLIO.png)
+
 _figure 2_
 
 ![Descent](https://pheidippidesbane.github.io/Projects/images/DESCENT.png)
+
 _figure 3_
 
 ![Sharpe Descent](https://pheidippidesbane.github.io/Projects/images/SHARPE_DESCENT.png)
+
 _figure 4_
 
 ![Weights](https://pheidippidesbane.github.io/Projects/images/WEIGHTS.png)
+
 _figure 5_
 
 <!---
