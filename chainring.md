@@ -31,12 +31,14 @@ You are doing a full gas time trial. Therefore:
   Speed<sub>bike</sub> = constant
 </math>
 
+
 <math>
   F<sub>r</sub> = constant
 </math>
 
+
 <math>
-  Articulation rate = Speed<sub>bike</sub> x <sup>r<sub>1</sub></sup>&frasl;<sub>r<sub>t</sub></sub> 
+  Articulation rate = <sup>Speed<sub>bike</sub></sup>&frasl;<sub>P</sub> x <sup>r<sub>1</sub></sup>&frasl;<sub>r<sub>t</sub></sub> 
 </math>
 
 <!---
