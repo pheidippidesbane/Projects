@@ -27,54 +27,29 @@ Consider the simple bicycle model in _Figure 1_:
   
 You are doing a full gas time trial. Therefore:
 
-
+<!---
 <p align = "center"><a href="https://www.codecogs.com/eqnedit.php?latex=\hat{\beta}&space;=&space;\frac{Cov(R_{stock},&space;R_{market})}{Var(R_{market})}" target="_blank"><img src="https://latex.codecogs.com/gif.latex?\hat{\beta}&space;=&space;\frac{Cov(R_{stock},&space;R_{market})}{Var(R_{market})}" title="\hat{\beta} = \frac{Cov(R_{stock}, R_{market})}{Var(R_{market})}" /></a><p align = "right">(1)</p></p>
+-->
+
+<p align = "center"><a href="https://www.codecogs.com/eqnedit.php?latex=Speed_{bike}&space;=&space;constant" target="_blank"><img src="https://latex.codecogs.com/gif.latex?Speed_{bike}&space;=&space;constant" title="Speed_{bike} = constant" /></a><p align = "right">(1)</p></p>
 
 
-	
-<p>
-<math>
-  Speed<sub>bike</sub> = constant
-</math>
-</p>
 
-<p>
-<math>
-  F<sub>r</sub> = constant
-</math>
-</p>
+<p align = "center"><a href="https://www.codecogs.com/eqnedit.php?latex=F_{r}&space;=&space;constant" target="_blank"><img src="https://latex.codecogs.com/gif.latex?F_{r}&space;=&space;constant" title="F_{r} = constant" /></a><p align = "right">(2)</p></p>
 
-<p>
-<math>
-  Articulation rate = <sup>Speed<sub>bike</sub></sup>&frasl;<sub>P</sub> x <sup>r<sub>1</sub></sup>&frasl;<sub>r<sub>t</sub></sub> 
-</math>
-</p>
+<p align = "center"><a href="https://www.codecogs.com/eqnedit.php?latex=rate_{articulation}&space;=&space;\frac{Speed_{bike}}{P}&space;\times&space;\frac{r_1}{r_t}" target="_blank"><img src="https://latex.codecogs.com/gif.latex?rate_{articulation}&space;=&space;\frac{Speed_{bike}}{P}&space;\times&space;\frac{r_1}{r_t}" title="rate_{articulation} = \frac{Speed_{bike}}{P} \times \frac{r_1}{r_t}" /></a><p align = "right">(3)</p></p>
 
-<p>
-<math>
-  F<sub>c</sub> = F<sub>r</sub> x <sup>r<sub>t</sub></sup>&frasl;<sub>r<sub>1</sub></sub>
-</math>
-</p>
 
-<p>
-<math>
-	&alpha;<sub>2</sub> = <sup>P</sup> &frasl; <sub>r<sub>2</sub></sub>
-</math>
-</p>
 
-<p>
-<math>
-	&alpha;<sub>1</sub> = <sup>P</sup> &frasl; <sub>r<sub>1</sub></sub> = constant x <sup>P</sup> &frasl; <sub>r<sub>2</sub></sub>
-</math>
-</p>
+<p align = "center"><a href="https://www.codecogs.com/eqnedit.php?latex=F_c&space;=&space;F_r&space;\times&space;\frac{r_t}{r_1}" target="_blank"><img src="https://latex.codecogs.com/gif.latex?F_c&space;=&space;F_r&space;\times&space;\frac{r_t}{r_1}" title="F_c = F_r \times \frac{r_t}{r_1}" /></a><p align = "right">(4)</p></p>
 
-<p>
-<math>
-  Friction Losses = k<sub>1</sub> x Articulation rate x F<sub>c</sub> x (&alpha;<sub>1</sub> + &alpha;<sub>1</sub>)
-	= k<sub>1</sub> x <sup>Speed<sub>bike</sub></sup>&frasl;<sub>P</sub> x <sup>r<sub>1</sub></sup>&frasl;<sub>r<sub>t</sub></sub> x F<sub>r</sub> x <sup>r<sub>t</sub></sup>&frasl;<sub>r<sub>1</sub></sub> x <sup>P</sup> &frasl; <sub>(r<sub>2</sub>) x (1 + constant) </sub>
-	= <sup> constant </sup> &frasl; <sub>r<sub>2</sub></sub>
-</math>
-</p>
+<p align = "center"><a href="https://www.codecogs.com/eqnedit.php?latex=\alpha_2&space;=&space;\frac{P}{r_2}" target="_blank"><img src="https://latex.codecogs.com/gif.latex?\alpha_2&space;=&space;\frac{P}{r_2}" title="\alpha_2 = \frac{P}{r_2}" /></a><p align = "right">(5)</p></p>
+
+
+<p align = "center"><a href="https://www.codecogs.com/eqnedit.php?latex=\alpha_1&space;=&space;\frac{P}{r_1}&space;=&space;\frac{P}{r_2&space;\times&space;constant}" target="_blank"><img src="https://latex.codecogs.com/gif.latex?\alpha_1&space;=&space;\frac{P}{r_1}&space;=&space;\frac{P}{r_2&space;\times&space;constant}" title="\alpha_1 = \frac{P}{r_1} = \frac{P}{r_2 \times constant}" /></a><p align = "right">(6)</p></p>
+
+
+<p align = "center"><a href="https://www.codecogs.com/eqnedit.php?latex=Loss_{friction}&space;=&space;constant&space;\times&space;rate_{articulation}&space;\times&space;F_c&space;\times&space;(\alpha_1&space;&plus;&space;\alpha_2)&space;=&space;\frac{constant}{r_1}" target="_blank"><img src="https://latex.codecogs.com/gif.latex?Loss_{friction}&space;=&space;constant&space;\times&space;rate_{articulation}&space;\times&space;F_c&space;\times&space;(\alpha_1&space;&plus;&space;\alpha_2)&space;=&space;\frac{constant}{r_1}" title="Loss_{friction} = constant \times rate_{articulation} \times F_c \times (\alpha_1 + \alpha_2) = \frac{constant}{r_1}" /></a><p align = "right">(7)</p></p>
 
 ### So yes, the friction losses scale inversely with ring size.
 
