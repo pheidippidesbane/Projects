@@ -45,6 +45,20 @@ You are doing a full gas time trial. Therefore:
 </math>
 </p>
 
+<p>
+<math>
+  F<sub>c</sub> = F<sub>r</sub> x <sup>r<sub>t</sub></sup>&frasl;<sub>r<sub>1</sub></sub> x (&alpha;<sub>1</sub> + &alpha;<sub>1</sub>)
+</math>
+</p>
+
+<p>
+<math>
+  Friction Losses = k<sub>1</sub> x Articulation rate x F<sub>c</sub>
+	= k<sub>1</sub> x <sup>Speed<sub>bike</sub></sup>&frasl;<sub>P</sub> x <sup>r<sub>1</sub></sup>&frasl;<sub>r<sub>t</sub></sub> x F<sub>r</sub> x <sup>r<sub>t</sub></sup>&frasl;<sub>r<sub>1</sub></sub> 
+	= constant x 
+</math>
+</p>
+
 <!---
 <MATH>&int;_a_^b^{f(x)<over>1+x} dx</MATH>    
     
