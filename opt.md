@@ -28,7 +28,7 @@ Why don't you just invest in the index? It has a number of advantages:
 
 1. Simple and easy.
 2. Usually pretty cheap in terms of management fees (index ETFs typically have an expense ratio around 10bps annually).
-3. Probably going to have similar asset returns to any hegde fund strategy if your an efficient market hypothesis believer (which is somewhat self defeating if you think about it; why would an efficient market keep paying PMs' salaries?).
+3. Probably going to have similar asset returns to any hegde fund strategy if you're an efficient market hypothesis believer (which is somewhat self defeating if you think about it; why would an efficient market keep paying PMs' salaries?).
 
 However, given an index of stocks, it seems very unlikely that the optimal weighting of securities just happens to be exactly the same as the weighting by order of market capitalisation (or whatever methodology the index provider uses). Surely you want to diversify _better_.
 
