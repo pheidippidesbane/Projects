@@ -67,9 +67,11 @@ You are doing a full gas time trial. Therefore:
 <math>
   Friction Losses = k<sub>1</sub> x Articulation rate x F<sub>c</sub> x (&alpha;<sub>1</sub> + &alpha;<sub>1</sub>)
 	= k<sub>1</sub> x <sup>Speed<sub>bike</sub></sup>&frasl;<sub>P</sub> x <sup>r<sub>1</sub></sup>&frasl;<sub>r<sub>t</sub></sub> x F<sub>r</sub> x <sup>r<sub>t</sub></sup>&frasl;<sub>r<sub>1</sub></sub> x <sup>P</sup> &frasl; <sub>(r<sub>2</sub>) x (1 + constant) </sub>
-	= constant x <sup>1</sup> &frasl; <sub>r<sub>2</sub></sub>
+	= <sup> constant </sup> &frasl; <sub>r<sub>2</sub></sub>
 </math>
 </p>
+
+### So yes, the friction losses scale inversely with ring size.
 
 <!---
 <MATH>&int;_a_^b^{f(x)<over>1+x} dx</MATH>    
