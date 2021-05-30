@@ -27,19 +27,23 @@ Consider the simple bicycle model in _Figure 1_:
   
 You are doing a full gas time trial. Therefore:
 
+<p>
 <math>
   Speed<sub>bike</sub> = constant
 </math>
+</p>
 
-
+<p>
 <math>
   F<sub>r</sub> = constant
 </math>
+</p>
 
-
+<p>
 <math>
   Articulation rate = <sup>Speed<sub>bike</sub></sup>&frasl;<sub>P</sub> x <sup>r<sub>1</sub></sup>&frasl;<sub>r<sub>t</sub></sub> 
 </math>
+</p>
 
 <!---
 <MATH>&int;_a_^b^{f(x)<over>1+x} dx</MATH>    
