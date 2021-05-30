@@ -16,6 +16,8 @@ Cheap stocks are probably cheap because they deserve to be cheap, i.e. they are 
 
 Expensive stocks are probably expensive because they're going to be the next AAPL, like TSLA.
 
+## Investing in the Index
+
 Why don't you just invest in the index? It has a number of advantages:
 
 1. Simple and easy.
@@ -24,9 +26,25 @@ Why don't you just invest in the index? It has a number of advantages:
 
 However, given an index of stocks, it seems very unlikely that the optimal weighting of securities just happens to be exactly the same as the weighting by order of market capitalisation (or whatever methodology the index provider uses). Surely you want to diversify _better_.
 
+## Diversifying
+
 How do you diversify _better_?
 
 For a start, maybe you don't want to go all in on the S&P500 which is heavily dominated by big tech stocks. You probably want to weight stocks so that anti-correlated stocks offset eachother.
+
+### Yes! Let's chose weights that anti-correlate optimally!
+
+I will show you a tool that I have made that uses some assumptions to chose the optimal portfolio weights given a universe of stocks.
+
+## The Tool
+
+This tool requires a number of assumptions for validity:
+
+1. The expected return of any asset can be modelled by it's historical volatility (in this case, linearly).
+2. The historical covariances of assets are indicative of future covariance.
+3. Securties are homogeneous in their propensity for cyclicality (a potential avenue for future development of the model).
+
+
 
 <!---
 Text can be **bold**, _italic_, or ~~strikethrough~~.
