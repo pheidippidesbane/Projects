@@ -31,6 +31,10 @@ $ x^2 / y^2 * int(x^2) $
 
 <MATH>&int;_a_^b^{f(x)<over>1+x} dx</MATH>    
     
+<math>
+	H(s) = ∫<sub>0</sub><sup>∞</sup> e<sup>-st</sup> h(t) dt
+</math>
+    
 Text can be **bold**, _italic_, or ~~strikethrough~~.
 
 [Link to another page](./another-page.html).
