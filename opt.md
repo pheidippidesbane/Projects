@@ -370,7 +370,7 @@ Initially, if chooses a number of random weightings in order to expose the cases
 
 The second half of the iteration uses stochastic gradient descent to optimise portfolio weights for maximum Sharpe ratio (shown in blue in _Figure 1_)
 
-<p align="center"> ![Modern Portfolio Theory](https://pheidippidesbane.github.io/Projects/images/MPT.png) </p>
+<p align="center"> <img src="https://pheidippidesbane.github.io/Projects/images/MPT.png" alt="Modern Portfolio Theory"> </p>
 
 <p align="center"> <i> Figure 1:  </i> </p>
 
