@@ -19,7 +19,9 @@ Whenever you commit to this repository, GitHub Pages will run [Jekyll](https://j
 
 [Big Chainrings](./chainring.html)
 
+* * *
 
+<p align="center"> <i> Run, Pheidippides, one race more! the meed is thy due! </i> </p>
 <p align="center"> <img src="https://pheidippidesbane.github.io/Projects/images/android-chrome-256x256.png" alt="Antlers"> </p>
 
 <!---
