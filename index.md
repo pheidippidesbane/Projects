@@ -14,7 +14,7 @@ Whenever you commit to this repository, GitHub Pages will run [Jekyll](https://j
 
 [LinkedIn](https://www.linkedin.com/in/hrhart)
 
-
+<p> <br /> </p>
 
 ### Here are some projects I have been working on:
 
