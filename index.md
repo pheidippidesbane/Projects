@@ -20,7 +20,7 @@ Whenever you commit to this repository, GitHub Pages will run [Jekyll](https://j
 [Big Chainrings](./chainring.html)
 
 
-<p> /n /n /n /n /n </p>
+<p> <br /> <br /> <br /> <br /><br /> <br /><br /> </p>
 
 
 * * *
