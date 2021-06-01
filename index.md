@@ -9,17 +9,22 @@ Whenever you commit to this repository, GitHub Pages will run [Jekyll](https://j
 
 
 ### Here is my LinkedIn Page:
+
+<p> <br /> </p>
+
 [LinkedIn](https://www.linkedin.com/in/hrhart)
 
 
 
 ### Here are some projects I have been working on:
 
-<p> <br /> <br /> </p>
+<p> <br /> </p>
 
 [Optimised Portfolio Tool](./opt.html)
 
 [Big Chainrings](./chainring.html)
+
+[An Old Running Shoe Blog from Years Ago](http://runshoereviews.blogspot.com/?m=1)
 
 
 <p> <br /> <br /> <br /> <br /><br /> <br /><br /> </p>
