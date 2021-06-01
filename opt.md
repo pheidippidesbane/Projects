@@ -405,6 +405,13 @@ The expected volatility of the portfolio can be estimated by generating a covari
 
 _Note that this tool considers asset prices' covariances when currency hedged, i.e. you sell the foreign currency future when buying the foreign asset, and vice versa. To consider the optimal amount of currency hedging, one could include currency pairs as an asset in the model._
 
+
+
+<p> <br /> <br /> <br /> <br /><br /> <br /><br /> </p>
+* * *
+<p align="center"> <i> Run, Pheidippides, one race more! The meed is thy due! </i> </p>
+<p align="center"> <img src="https://pheidippidesbane.github.io/Projects/images/android-chrome-256x256.png" alt="Antlers"> </p>
+
 <!---
 Text can be **bold**, _italic_, or ~~strikethrough~~.
 
