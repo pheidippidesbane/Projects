@@ -15,6 +15,8 @@ Whenever you commit to this repository, GitHub Pages will run [Jekyll](https://j
 
 ### Here are some projects I have been working on:
 
+<p> <br /> <br /> </p>
+
 [Optimised Portfolio Tool](./opt.html)
 
 [Big Chainrings](./chainring.html)
