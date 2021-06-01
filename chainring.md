@@ -51,6 +51,14 @@ You are doing a full gas time trial. Therefore:
 
 ### So yes, the friction losses scale inversely with ring size.
 
+
+<p> <br /> <br /> <br /> <br /><br /> <br /><br /> </p>
+
+* * *
+
+<p align="center"> <i> Run, Pheidippides, one race more! The meed is thy due! </i> </p>
+<p align="center"> <img src="https://pheidippidesbane.github.io/Projects/images/android-chrome-256x256.png" alt="Antlers"> </p>
+
 <!---
 <MATH>&int;_a_^b^{f(x)<over>1+x} dx</MATH>    
     
