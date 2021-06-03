@@ -43,7 +43,7 @@ What you can see across stocks, and particularly for a large index like the S&P5
 
 [This](https://www.investopedia.com/terms/d/deathcross.asp) article from Investopedia explains the concept of these crosses better than I can.
 
-I have tested this by taking the timeseries of closing prices for an asset, calculating the 50 and 200 DMA.
+I have tested this by taking the timeseries of closing prices for an asset, calculating the 50 and 200 DMA and overlaying systematic trading actions.
 
 You start with enough money to buy one share of the company. You can chose to either:
 
@@ -58,6 +58,13 @@ For each strategy, I calculate the return in terms of APR gained on your origina
 However, a continuously compounded rate is not possible to calculate when you have a negative profit and APR at the end, which occured frequently in this study.
 
 ### Results
+
+First, let's look at the strategy generated for Ferrari stock to understand what's going on:
+
+<p align="center"> <img src="https://pheidippidesbane.github.io/Projects/images/RACEMIbacktest50v200DMAeditted.png" alt="Backtest"> </p>
+<p align="center"> <i> Figure 4: Ferrari Death-Cross Golden-Cross Strategy. </i> </p>
+
+Strategy implemented for other stocks:
 
 <p align="center"> <img src="https://pheidippidesbane.github.io/Projects/images/SPYbacktest50v200DMA.png" alt="Backtest"> </p>
 
