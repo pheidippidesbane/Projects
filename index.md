@@ -13,6 +13,7 @@ Whenever you commit to this repository, GitHub Pages will run [Jekyll](https://j
 _(none of this should be taken as investment advice.)_
 
 - [Optimised Portfolio Tool](./opt.html)
+- [Backtesting](./backtest.html)
 
 ### _Engineering_ 
 
