@@ -10,8 +10,7 @@ Whenever you commit to this repository, GitHub Pages will run [Jekyll](https://j
 ## Here are some projects I have been working on:
 
 ### _Finance_ 
-
-_None of this should be taken as investment advice._
+_ (none of this should be taken as investment advice.)_
 
 - [Optimised Portfolio Tool](./opt.html)
 
