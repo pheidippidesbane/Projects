@@ -61,13 +61,14 @@ However, a continuously compounded rate is not possible to calculate when you ha
 
 First, let's look at the strategy generated for Ferrari stock to understand what's going on:
 
-<p align="center"> <img src="https://pheidippidesbane.github.io/Projects/images/RACEMIbacktest50v200DMAeditted.png" alt="Backtest" width="400" 
-     height="250"> </p>
+<p align="center"> <img src="https://pheidippidesbane.github.io/Projects/images/RACEMIbacktest50v200DMAeditted.png" alt="Backtest" width="600" 
+     height="380"> </p>
 <p align="center"> <i> Figure 4: Ferrari Death-Cross Golden-Cross Strategy. </i> </p>
 
-Strategy implemented for other stocks:
+Strategy applied to the S&P 500 index:
 
 <p align="center"> <img src="https://pheidippidesbane.github.io/Projects/images/SPYbacktest50v200DMA.png" alt="Backtest"> </p>
+<p align="center"> <i> Figure 5: S&P500 Death-Cross Golden-Cross Strategy. </i> </p>
 
 <p align="center"> <img src="https://pheidippidesbane.github.io/Projects/images/AAPLbacktest50v200DMA.png" alt="Backtest"> </p>
 
