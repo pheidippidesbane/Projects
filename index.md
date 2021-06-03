@@ -7,18 +7,7 @@ Whenever you commit to this repository, GitHub Pages will run [Jekyll](https://j
 -->
 
 
-
-## Here is my LinkedIn Page:
-
-<p> <br /> </p>
-
-[LinkedIn](https://www.linkedin.com/in/hrhart)
-
-<p> <br /> </p>
-
 ## Here are some projects I have been working on:
-
-<p> <br /> </p>
 
 ### _Finance_ 
 
