@@ -1,4 +1,4 @@
-## Welcome to My Website!
+# Welcome to My Website!
 
 
 <!--- You can use the [editor on GitHub](https://github.com/pheidippidesbane/sitetwo/edit/gh-pages/index.md) to maintain and preview the content for your website in Markdown files.
@@ -8,7 +8,7 @@ Whenever you commit to this repository, GitHub Pages will run [Jekyll](https://j
 
 
 
-### Here is my LinkedIn Page:
+## Here is my LinkedIn Page:
 
 <p> <br /> </p>
 
@@ -16,15 +16,21 @@ Whenever you commit to this repository, GitHub Pages will run [Jekyll](https://j
 
 <p> <br /> </p>
 
-### Here are some projects I have been working on:
+## Here are some projects I have been working on:
 
 <p> <br /> </p>
 
-[Optimised Portfolio Tool](./opt.html)
+### _Finance_ 
 
-[Big Chainrings](./chainring.html)
+- [Optimised Portfolio Tool](./opt.html)
 
-[An Old Running Shoe Blog from Years Ago](http://runshoereviews.blogspot.com/?m=1)
+### _Engineering_ 
+
+- [Big Chainrings](./chainring.html)
+
+### _Other_ 
+
+- [An Old Running Shoe Blog from Years Ago](http://runshoereviews.blogspot.com/?m=1)
 
 
 <p> <br /> <br /> <br /> <br /><br /> <br /><br /> </p>
