@@ -10,7 +10,7 @@ layout: default
 
 A fun thing to do when you've got a bloomberg terminal is to load up the 'First Word' component of launchpad and see what technical analysis advice they've got for you today. I sometimes find it tickling to see that they suggest selling gold because of a death cross, or that you should buy EURSEK because of a technical breakout.
 
-This is perhaps a little unfair, as there certainly are cases in which financial instruments can see their price deviate from a Markov chain. However, these are probably going to be quite difficult to predict unless you understand the underlying reason for gamma stickiness or other such phenomenon, in which case you might as well start from understanding the market rather than drawing funny lines.
+This is perhaps a little unfair, as there certainly are cases in which financial instruments can see their price deviate from a Markov chain. However, these are probably going to be quite difficult to predict unless you understand the underlying reason for gamma stickiness or other such phenomena, in which case you might as well start from understanding the market rather than drawing funny lines.
 
 [This](https://www.reddit.com/r/wallstreetbets/comments/m2huy9/technical_analysis_of_todays_gme_movement/) piece is a brilliant characature of the typical day trading technical analyst, but aside from being pretty hilarious, it doesn't actually make any quantitative case against the existance of a 'textbook Salmon chart'!
 
@@ -61,7 +61,8 @@ However, a continuously compounded rate is not possible to calculate when you ha
 
 First, let's look at the strategy generated for Ferrari stock to understand what's going on:
 
-<p align="center"> <img src="https://pheidippidesbane.github.io/Projects/images/RACEMIbacktest50v200DMAeditted.png" alt="Backtest"> </p>
+<p align="center"> <img src="https://pheidippidesbane.github.io/Projects/images/RACEMIbacktest50v200DMAeditted.png" alt="Backtest" width="400" 
+     height="250"> </p>
 <p align="center"> <i> Figure 4: Ferrari Death-Cross Golden-Cross Strategy. </i> </p>
 
 Strategy implemented for other stocks:
