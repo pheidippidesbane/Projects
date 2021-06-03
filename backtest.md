@@ -70,6 +70,8 @@ Strategy applied to the S&P 500 index:
 <p align="center"> <img src="https://pheidippidesbane.github.io/Projects/images/SPYbacktest50v200DMA.png" alt="Backtest"> </p>
 <p align="center"> <i> Figure 5: S&P500 Death-Cross Golden-Cross Strategy. </i> </p>
 
+Other stocks:
+
 <p align="center"> <img src="https://pheidippidesbane.github.io/Projects/images/AAPLbacktest50v200DMA.png" alt="Backtest"> </p>
 
 <p align="center"> <img src="https://pheidippidesbane.github.io/Projects/images/VOW3DEbacktest50v200DMA.png" alt="Backtest"> </p>
