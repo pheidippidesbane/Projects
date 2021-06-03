@@ -11,6 +11,8 @@ Whenever you commit to this repository, GitHub Pages will run [Jekyll](https://j
 
 ### _Finance_ 
 
+_None of this should be taken as investment advice._
+
 - [Optimised Portfolio Tool](./opt.html)
 
 ### _Engineering_ 
