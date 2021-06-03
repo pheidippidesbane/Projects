@@ -5,11 +5,6 @@ layout: default
 
 [Home](./index.html)
 
----
-layout: default
----
-
-[Home](./index.html)
 
 # Backtesting Technical Analysis Ideas
 
