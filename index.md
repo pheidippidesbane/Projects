@@ -14,6 +14,7 @@ _(none of this should be taken as investment advice)_
 
 - [Optimised Portfolio Tool](./opt.html)
 - [Backtesting](./backtest.html)
+- [Blotto - Game Theory and OOP](./OOP_Blotto.html)
 
 ### _Engineering_ 
 
