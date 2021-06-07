@@ -15,13 +15,19 @@ _(none of this should be taken as investment advice)_
 - [Optimised Portfolio Tool](./opt.html)
 - [Backtesting](./backtest.html)
 - [Blotto - Game Theory and OOP](./OOP_Blotto.html)
+- [DCF Valuation of S&P 500 Index]./CF_Report.pdf)
 
 ### _Engineering_ 
 
+- [Modelling Rapidly Varying Open Channel Flow](./Final_Report.pdf)
+- [Design of an Ekranoplan Engine](./AET_Report_III.pdf)
+- [Aerodynamic Analysis of the Hercules C130 Aircraft](./CFD_2.pdf)
+- [Computational Solution of the One Dimensional Diffusion Equation](./CFD_19-20_Project1_Report_Hart_01190775.pdf)
 - [Big Chainrings](./chainring.html)
 
 ### _Other_ 
 
+- [Basic Predictive Statistics](./StatsHart01190775.pdf)
 - [An Old Running Shoe Blog from Years Ago](http://runshoereviews.blogspot.com/?m=1)
 
 
