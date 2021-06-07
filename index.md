@@ -15,7 +15,7 @@ _(none of this should be taken as investment advice)_
 - [Optimised Portfolio Tool](./opt.html)
 - [Backtesting](./backtest.html)
 - [Blotto - Game Theory and OOP](./OOP_Blotto.html)
-- [DCF Valuation of S&P 500 Index]./CF_Report.pdf)
+- [DCF Valuation of S&P 500 Index](./CF_Report.pdf)
 
 ### _Engineering_ 
 
