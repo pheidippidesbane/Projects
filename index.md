@@ -23,6 +23,7 @@ _(none of this should be taken as investment advice)_
 - [Design of an Ekranoplan Engine](./AET_Report_III.pdf)
 - [Aerodynamic Analysis of the Hercules C130 Aircraft](./CFD_2.pdf)
 - [Computational Solution of the One Dimensional Diffusion Equation](./CFD_19-20_Project1_Report_Hart_01190775.pdf)
+- [Smooth Particle Hydrodynamics Literature Review](./Smooth_Particle_Hydrodynamics.pdf)
 - [Big Chainrings](./chainring.html)
 
 ### _Other_ 
