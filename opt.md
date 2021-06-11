@@ -405,6 +405,73 @@ The expected volatility of the portfolio can be estimated by generating a covari
 
 _Note that this tool considers asset prices' covariances when currency hedged, i.e. you sell the foreign currency future when buying the foreign asset, and vice versa. To consider the optimal amount of currency hedging, one could include currency pairs as an asset in the model._
 
+**Update**
+
+_See below an adjustment for the graph() function to consider assets unhedged from FX:_
+
+```python
+#######################
+### IMPORT PACKAGES ###
+#######################
+
+import sys
+sys.path
+sys.path.append(r'\users\henry\appdata\local\packages\pythonsoftwarefoundation.python.3.9_qbz5n2kfra8p0\localcache\local-packages\python39\site-packages')
+import pandas_datareader.data as web
+import datetime as dt
+import pandas as pd
+import numpy as np
+import random as rd
+import matplotlib.pyplot as plt
+from itertools import cycle
+import yfinance as yf
+
+figure_number = 0 # start counting figures
+
+################
+### SETTINGS ###
+################
+
+start_of_universe = 1970
+stocks_path = 'C:\\Users\\henry\\OneDrive\\Documents\\Misc\\Stonks\\currency_unhedging\\YAHOO_STONKS.csv'
+exclude = ['RACE.MI', 'BABA', '1299.HK']
+number_of_trials = 40000
+pc_change = 1
+method = 'both' # 'random' 'optimise'
+pc_risk_free_rate = -0.18
+home_currency = 'EUR'
+
+##############
+### PRICES ###
+##############
+
+# Graph a stock from start_year until now
+def graph(stock, start_year, figure_number, graph_on = True, home_currency = home_currency):
+    start = dt.datetime(start_year,1,1)
+    end = dt.datetime.now()
+    dfe = web.DataReader(stock, 'yahoo', start, end)
+    df_out = pd.DataFrame()
+    df_out[stock] = dfe['Adj Close']
+    ### CURRENCY BIT ###
+    if home_currency != None:
+        stock_currency = yf.Ticker(stock).info['currency']
+        if stock_currency != home_currency:
+            currency_overrides_dict = {'ZAc':'ZAR'}
+            if stock_currency in currency_overrides_dict.keys():
+                stock_currency = currency_overrides_dict[stock_currency]
+            df_curr = web.DataReader(f"{stock_currency}{home_currency}=X", 'yahoo', start, end)
+            print(f"{stock_currency}{home_currency} is the currency for {stock}")
+            df_out[f"{stock_currency}{home_currency}"] = df_out.merge(df_curr, how = "inner", on = 'Date')['Adj Close']
+            df_out[f"{stock}_local"] = df_out[stock]
+            df_out[stock] = df_out[f"{stock}_local"] * df_out[f"{stock_currency}{home_currency}"]
+            df_out = df_out[[stock]].dropna()
+    if graph_on == True:
+        plt.figure(figure_number)
+        plt.plot(df_out[stock])
+        plt.title(stock)
+        figure_number += 1
+    return df_out, figure_number
+```
 
 
 <p> <br /> <br /> <br /> <br /><br /> <br /><br /> </p>
