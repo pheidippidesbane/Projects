@@ -12,24 +12,25 @@ Whenever you commit to this repository, GitHub Pages will run [Jekyll](https://j
 ### _Finance_   
 _(none of this should be taken as investment advice)_
 
-- [Optimised Portfolio Tool](./opt.html)
-- [Backtesting](./backtest.html)
-- [Blotto - Game Theory and OOP](./OOP_Blotto.html)
-- [DCF Valuation of S&P 500 Index](./CF_Report.pdf)
+- [Optimised Portfolio Tool](./opt.html) _- 28th May 2021_
+- [Backtesting](./backtest.html) _- 3rd June 2021_
+- [Blotto - Game Theory and OOP](./OOP_Blotto.html) _- 7th June 2021_
+- [DCF Valuation of S&P 500 Index](./CF_Report.pdf)  _- 20th February 2020_
 
 ### _Engineering_ 
 
-- [Modelling Rapidly Varying Open Channel Flow](./Final_Report.pdf)
-- [Design of an Ekranoplan Engine](./AET_Report_III.pdf)
-- [Aerodynamic Analysis of the Hercules C130 Aircraft](./CFD_2.pdf)
-- [Computational Solution of the One Dimensional Diffusion Equation](./CFD_19-20_Project1_Report_Hart_01190775.pdf)
-- [Smooth Particle Hydrodynamics Literature Review](./Smooth_Particle_Hydrodynamics.pdf)
-- [Big Chainrings](./chainring.html)
+- [Modelling Rapidly Varying Open Channel Flow](./Final_Report.pdf) _- 4th June 2020_
+- [Design of an Ground Effect Vehicle Engine](./AET_Report_III.pdf) _- 9th March 2020_
+- [Design of an Automatic Continuously Variable Transmission for a Commuter Bicycle](./Final_Report-compressed.pdf) _- 5th June 2019_
+- [Aerodynamic Analysis of the Hercules C130 Aircraft](./CFD_2.pdf) _- 12th March 2020_
+- [Computational Solution of the One Dimensional Diffusion Equation](./CFD_19-20_Project1_Report_Hart_01190775.pdf) _- 16th January 2020_
+- [Smooth Particle Hydrodynamics Literature Review](./Smooth_Particle_Hydrodynamics.pdf) _- 14th December 2018_
+- [Big Chainrings](./chainring.html) _- 30th May 2021_
 
 ### _Other_ 
 
-- [Basic Predictive Statistics](./StatsHart01190775.pdf)
-- [An Old Running Shoe Blog from Years Ago](http://runshoereviews.blogspot.com/?m=1)
+- [Statistical Modelling](./StatsHart01190775.pdf) _- 9th March 2020_
+- [Running Shoe Blog](http://runshoereviews.blogspot.com/?m=1) _- 10th January 2016_
 
 
 <p> <br /> <br /> <br /> <br /><br /> <br /><br /> </p>
