@@ -24,16 +24,6 @@
     function addrow() {
       if (document.getElementById("method").value == "onepoint") {
       document.getElementById("extraRow").innerHTML ="Expontial Factor <input type='number' min='1' id = 'exponentialFactor' step='.001' name='exponentialFactor' value='1.06' />"
-      // var expon = document.createElement("input");
-      // expon.id = "exponentialFactor";
-      // expon.type = "number";
-      // expon.min = "0";
-      // expon.step = "0.001";
-      // expon.style = "width:15%";
-      // expon.onchange = "chart()";
-      // //document.getElementById("extraRow").innerHTML = " Exponential Factor"
-      // parent = document.getElementById("extraRow")
-      // parent.appendChild(expon);
     } else if (document.getElementById("method").value == "twopoint") {
       document.getElementById("extraRow").innerHTML = "<input id = 'distance2' list='distances2' name='distance2' placeholder='Number of Metres (w/o units) or select' style='width:30%'/> <datalist id='distances2'> <option value='400'>400m</option> <option value='800'>800m</option> <option value='1000'>1000m</option> <option value='1500'>1500m</option> <option value='1609'>1-mile</option> <option value='3000'>3000m</option> <option value='3218'>2-mile</option> <option value='5000'>5000m</option> <option value='10000'>10000m</option> <option value='21097.494'>half-marathon</option> <option value='42195.0'>marathon</option> </datalist> <input type='number' min='0' style='width:15%' id='time2a' /> min <input type='number' min='0' step='.50' style='width:20%' id='time2b' /> sec<br>";
     } else if (document.getElementById("method").value == "vdot") {
@@ -100,7 +90,21 @@
                                       var pace = time * 1000 / distance
                                       return pace.toString().toMMSS()
                                   }
-
+    function calc_vo2(distance) {
+                                      var time = calculate_pure(distance)
+                                      var velocity2 = distance * 60 / time
+                                      var percent_max2 = 0.8 + 0.1894393 * Math.pow(Math.E, (-0.012778 * time / 60)) + 0.2989558 * Math.pow(Math.E, (-0.1932605 * time / 60));
+                                      var vo22 = -4.60 + 0.182258 * velocity2 + 0.000104 * Math.pow(velocity2, 2);
+                                      var vo2max2 = vo22 / percent_max2;
+                                      if (percent_max2 > 1) {
+                                                              percent_max2 = 100
+                                                              vo22 = vo2max2
+                                                            }
+                                      else {
+                                                              percent_max2 = 100 * percent_max2
+                                            }
+                                      return {percent_max2, vo22, vo2max2}
+                                  }
   </script>
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js"></script>
@@ -162,7 +166,7 @@ var html1 = `
     <table>
         <thead>
             <tr>
-                <td>Distance</td>
+                <td>Distance (m)</td>
             </tr>
         </thead>
         <tbody>
@@ -182,7 +186,7 @@ for (distance of distancelist) {
     <table>
         <thead>
             <tr>
-                <td>Pace</td>
+                <td>Pace (mm:ss per km)</td>
             </tr>
         </thead>
         <tbody>
@@ -201,7 +205,7 @@ for (distance of distancelist) {
     <table>
         <thead>
             <tr>
-                <td>Time</td>
+                <td>Time (HH:mm:ss)</td>
             </tr>
         </thead>
         <tbody>
@@ -210,6 +214,44 @@ for (distance of distancelist) {
   html1 += `
             <tr>
                 <td>${calculate(distance)}</td>
+                `
+}
+  html1 +=  `</tr>
+        </tbody>
+    </table>
+</td>
+<td>
+    <table>
+        <thead>
+            <tr>
+                <td>V02 (mL/kg/min)</td>
+            </tr>
+        </thead>
+        <tbody>
+        `
+for (distance of distancelist) {
+  html1 += `
+            <tr>
+                <td>${Number.parseFloat(calc_vo2(distance).vo22).toPrecision(3)}</td>
+                `
+}
+  html1 +=  `</tr>
+        </tbody>
+    </table>
+</td>
+<td>
+    <table>
+        <thead>
+            <tr>
+                <td>Percent V02max</td>
+            </tr>
+        </thead>
+        <tbody>
+        `
+for (distance of distancelist) {
+  html1 += `
+            <tr>
+                <td>${Number.parseFloat(calc_vo2(distance).percent_max2).toPrecision(3)}</td>
                 `
 }
   html1 +=  `</tr>
@@ -286,10 +328,10 @@ String.prototype.toMMSS = function () {
 
 </head>
 
-<body background="/static/lightbluegradient.jpg">
+<body background="./images/run_track.jpg">
 
   <select id="method" onchange="addrow()" style="width:40%">
-    <option value="vdot">VDOT</option>
+    <option value="vdot">VDOT (Jack Daniels)</option>
     <!--<option value="kellog">Kellog</option> -->
     <option value="onepoint">One Point</option>
     <option value="twopoint">Two Point</option>
