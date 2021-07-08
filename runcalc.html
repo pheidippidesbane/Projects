@@ -1,0 +1,329 @@
+
+<html>
+
+<head>
+  <title>Pheidippidies' Bane's Time Calculator </title>
+  <meta name=viewport content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" type="text/css" href="/static/style.css">
+<!--
+  <script type="text/javascript">
+    function addrow() {
+      if (document.getElementById("method").value == "onepoint") {
+      document.getElementById("extraRow").innerHTML = " Exponential Factor <input type='number' min='0' step = 0.001 style='width:15%' placeholder = 1.06 id='exponentialFactor' onchange='chart()'/> <br>";
+    } else if (document.getElementById("method").value == "twopoint") {
+      document.getElementById("extraRow").innerHTML = "<input id = 'distance2' list='distances2' name='distance2' placeholder='Number of Metres (w/o units) or select' style='width:30%'/> <datalist id='distances2'> <option value='400'>400m</option> <option value='800'>800m</option> <option value='1000'>1000m</option> <option value='1500'>1500m</option> <option value='1609'>1-mile</option> <option value='3000'>3000m</option> <option value='3218'>2-mile</option> <option value='5000'>5000m</option> <option value='10000'>10000m</option> <option value='21097.494'>half-marathon</option> <option value='42195.0'>marathon</option> </datalist> <input type='number' min='0' style='width:15%' id='time2a' /> min <input type='number' min='0' step='.50' style='width:20%' id='time2b' /> sec<br>";
+    } else if (document.getElementById("method").value == "vdot") {
+      document.getElementById("extraRow").innerHTML = ""
+    } else if (document.getElementById("method").value == "kellog") {
+      document.getElementById("extraRow").innerHTML = ""
+    }
+  }
+  </script>
+-->
+  <script type="text/javascript">
+    function addrow() {
+      if (document.getElementById("method").value == "onepoint") {
+      document.getElementById("extraRow").innerHTML ="Expontial Factor <input type='number' min='1' id = 'exponentialFactor' step='.001' name='exponentialFactor' value='1.06' />"
+      // var expon = document.createElement("input");
+      // expon.id = "exponentialFactor";
+      // expon.type = "number";
+      // expon.min = "0";
+      // expon.step = "0.001";
+      // expon.style = "width:15%";
+      // expon.onchange = "chart()";
+      // //document.getElementById("extraRow").innerHTML = " Exponential Factor"
+      // parent = document.getElementById("extraRow")
+      // parent.appendChild(expon);
+    } else if (document.getElementById("method").value == "twopoint") {
+      document.getElementById("extraRow").innerHTML = "<input id = 'distance2' list='distances2' name='distance2' placeholder='Number of Metres (w/o units) or select' style='width:30%'/> <datalist id='distances2'> <option value='400'>400m</option> <option value='800'>800m</option> <option value='1000'>1000m</option> <option value='1500'>1500m</option> <option value='1609'>1-mile</option> <option value='3000'>3000m</option> <option value='3218'>2-mile</option> <option value='5000'>5000m</option> <option value='10000'>10000m</option> <option value='21097.494'>half-marathon</option> <option value='42195.0'>marathon</option> </datalist> <input type='number' min='0' style='width:15%' id='time2a' /> min <input type='number' min='0' step='.50' style='width:20%' id='time2b' /> sec<br>";
+    } else if (document.getElementById("method").value == "vdot") {
+      document.getElementById("extraRow").innerHTML = ""
+    }
+  }
+  </script>
+  <script type="text/javascript">
+    function timestwo(x) {
+      return Math.pow(x * 2,3)
+    }
+    function getBaseLog(x, y) {
+      return Math.log(y) / Math.log(x);
+  }
+    function calculate_pure(distance) {
+      var d1 = Number(document.getElementById("distance1").value);
+      var t1 = Number(document.getElementById("time1a").value) * 60.0 + Number(document.getElementById("time1b").value);
+      document.getElementById.innerHTML += "t1"
+      if (document.getElementById("method").value == "onepoint") {
+        var exp = Number(document.getElementById("exponentialFactor").value);
+        document.getElementById.innerHTML += "exp"
+        var time = t1 * (Math.pow(distance/d1, exp));
+    } else if (document.getElementById("method").value == "twopoint") {
+        var d2 = Number(document.getElementById("distance2").value);
+        var t2 = Number(document.getElementById("time2a").value) * 60.0 + Number(document.getElementById("time2b").value);
+        var exp = getBaseLog(d1/d2, t1/t2);
+        var time = t1 * (Math.pow(distance/d1, exp));
+    } else if (document.getElementById("method").value == "vdot") {
+        var velocity1 = d1 * 60/ t1;
+        var percent_max1 = 0.8 + 0.1894393 * Math.pow(Math.E, (-0.012778 * t1 /60)) + 0.2989558 * Math.pow(Math.E, (-0.1932605 * t1 / 60));
+        var vo21 = -4.60 + 0.182258 * velocity1 + 0.000104 * Math.pow(velocity1, 2);
+        var vo2max1 = vo21 / percent_max1;
+        var time = t1;
+        if (distance > d1) {
+          var vo2max2 = 200
+          while (vo2max2 > vo2max1) {
+                                    var velocity2 = distance * 60 / time;
+                                    var percent_max2 = 0.8 + 0.1894393 * Math.pow(Math.E, (-0.012778 * time / 60)) + 0.2989558 * Math.pow(Math.E, (-0.1932605 * time / 60));
+                                    var vo22 = -4.60 + 0.182258 * velocity2 + 0.000104 * Math.pow(velocity2, 2);
+                                    var vo2max2 = vo22 / percent_max2;
+                                    time++;
+                                    }
+                            }
+        else                {
+          var vo2max2 = 0
+          while (vo2max2 < vo2max1) {
+                                    var velocity2 = distance * 60 / time;
+                                    var percent_max2 = 0.8 + 0.1894393 * Math.pow(Math.E, (-0.012778 * time / 60)) + 0.2989558 * Math.pow(Math.E, (-0.1932605 * time / 60));
+                                    var vo22 = -4.60 + 0.182258 * velocity2 + 0.000104 * Math.pow(velocity2, 2);
+                                    var vo2max2 = vo22 / percent_max2;
+                                    time--;
+                                    }
+                            }
+    }
+      return time;
+    };
+
+    function calculate(distance) {
+                                      var time = calculate_pure(distance)
+                                      return time.toString().toHHMMSS()
+                                  }
+    function calc_pace(distance) {
+                                      var time = calculate_pure(distance)
+                                      var pace = time * 1000 / distance
+                                      return pace.toString().toMMSS()
+                                  }
+
+  </script>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chartjs-adapter-moment@0.1.1"></script>
+  <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.6.2/jquery.js"></script>
+  <script src="/static/jquery.transform2d.js"></script>
+  <script>
+// function chart() {
+// var distancelist = [400,800,5000,10000,21097,42195]
+// var timelist = distancelist.map(calculate)
+// var ctx = document.getElementById('myChart').getContext('2d');
+// var config = {
+//     type: 'line',
+//     data: {
+//         labels: distancelist,
+//         datasets: [{
+//             label: Number(document.getElementById("distance1").value),//'Time',
+//             data: timelist,
+//             backgroundColor: 'rgba(255, 99, 132, 0.2)',
+//             borderColor: 'rgba(255, 99, 132, 1)',
+//             borderWidth: 1
+//         }]
+//     },
+//     options: {
+//         scales: {
+//             y: {
+//                 beginAtZero: true
+//             }
+//         }
+//     }
+// };
+// var chart = new Chart(ctx, config);
+// chart.destroy()
+// var chart = new Chart(ctx, config);
+// };
+
+function chart() {
+var distancelist = [100,200,400,800,1000,1500,1609,2000,3000,5000,8047,10000,15000,16093,20000,21097,25000,30000,40000,42195,50000,100000];
+if (calculate_pure(10000) > 20*60) {
+var dummy_kms = 5
+var dummy_time = calculate_pure(dummy_kms*1000)
+while (dummy_time < 3600) {
+  var dummy_time = calculate_pure(dummy_kms*1000)
+  dummy_kms++
+}
+var dummy_distance = (dummy_kms - 2) * 1000
+var dummy_time = calculate_pure(dummy_distance)
+while (dummy_time < 3600) {
+  var dummy_time = calculate_pure(dummy_distance)
+  dummy_distance++
+}
+distancelist.push(dummy_distance)
+distancelist.sort(function(a, b){return a-b})
+                                    }
+var html1 = `
+<table>
+<tr>
+<td>
+    <table>
+        <thead>
+            <tr>
+                <td>Distance</td>
+            </tr>
+        </thead>
+        <tbody>
+`
+
+for (distance of distancelist) {
+  html1 += `
+            <tr>
+                <td>${distance}</td>
+                `
+}
+  html1 +=  `</tr>
+        </tbody>
+    </table>
+</td>
+<td>
+    <table>
+        <thead>
+            <tr>
+                <td>Pace</td>
+            </tr>
+        </thead>
+        <tbody>
+        `
+for (distance of distancelist) {
+  html1 += `
+            <tr>
+                <td>${calc_pace(distance)}</td>
+                `
+}
+  html1 +=  `</tr>
+        </tbody>
+    </table>
+</td>
+<td>
+    <table>
+        <thead>
+            <tr>
+                <td>Time</td>
+            </tr>
+        </thead>
+        <tbody>
+        `
+for (distance of distancelist) {
+  html1 += `
+            <tr>
+                <td>${calculate(distance)}</td>
+                `
+}
+  html1 +=  `</tr>
+        </tbody>
+    </table>
+</td>
+</table>`
+document.getElementById("extraRow2").innerHTML = html1
+$("#canvaswrap").html("").html('<canvas id="myChart"></canvas>');
+var timelist = distancelist.map(calculate)
+var pacelist = distancelist.map(calc_pace)
+var canvas = document.getElementById("myChart");
+var ctx = canvas.getContext("2d");
+var config = {
+    type: 'line',
+    data:   {
+        labels: pacelist,
+        datasets: [{
+            label: "",//Number(document.getElementById("distance1").value),//'Time',
+            data: distancelist,
+            backgroundColor: 'rgba(255, 99, 132, 0.2)',
+            borderColor: 'rgba(255, 99, 132, 1)',
+            borderWidth: 1
+                  }]
+            },
+    options: {
+        responsive: true,
+        scales: {
+        x: {
+                type: 'time',
+                time: {
+                    parser: 'mm:ss',
+                    unit: "seconds",
+                    tooltipFormat: 'mm:ss',
+                    displayFormats: {
+                        'seconds': "mm:ss"
+                    },
+                    unitStepSize: 30
+                }
+            },
+        }
+            }
+          };
+var chart = new Chart(ctx, config);
+chart.data.labels = pacelist;
+chart.data.datasets[0].data = distancelist;
+chart.update();
+//distancelist.map(calculate)
+}
+
+String.prototype.toHHMMSS = function () {
+    var sec_num = parseInt(this, 10); // don't forget the second param
+    var hours   = Math.floor(sec_num / 3600);
+    var minutes = Math.floor((sec_num - (hours * 3600)) / 60);
+    var seconds = sec_num - (hours * 3600) - (minutes * 60);
+
+    if (hours   < 10) {hours   = "0"+hours;}
+    if (minutes < 10) {minutes = "0"+minutes;}
+    if (seconds < 10) {seconds = "0"+seconds;}
+    return hours+':'+minutes+':'+seconds;
+}
+String.prototype.toMMSS = function () {
+    var sec_num = parseInt(this, 10); // don't forget the second param
+    var hours   = Math.floor(sec_num / 3600);
+    var minutes = Math.floor((sec_num - (hours * 3600)) / 60);
+    var seconds = sec_num - (hours * 3600) - (minutes * 60);
+
+    if (hours   < 10) {hours   = "0"+hours;}
+    if (minutes < 10) {minutes = "0"+minutes;}
+    if (seconds < 10) {seconds = "0"+seconds;}
+    return minutes+':'+seconds;
+}
+</script>
+
+</head>
+
+<body background="/static/lightbluegradient.jpg">
+
+  <select id="method" onchange="addrow()" style="width:40%">
+    <option value="vdot">VDOT</option>
+    <!--<option value="kellog">Kellog</option> -->
+    <option value="onepoint">One Point</option>
+    <option value="twopoint">Two Point</option>
+  </select>
+  <br>
+  <br>
+  <div id = "inputs" class = "container">
+  <input id = "distance1" list="distances1" name="distance1" placeholder="Number of Metres (w/o units) or select" style="width:30%" onchange = "chart()" />
+  <datalist id="distances1">
+    <option value="400">400m</option>
+    <option value="800">800m</option>
+    <option value="1000">1000m</option>
+    <option value="1500">1500m</option>
+    <option value="1609">1-mile</option>
+    <option value="3000">3000m</option>
+    <option value="3218">2-mile</option>
+    <option value="5000">5000m</option>
+    <option value="10000">10000m</option>
+    <option value="21097.494">half-marathon</option>
+    <option value="42195.0">marathon</option>
+  </datalist>
+  <input type="number" min="0" style="width:15%" id="time1a" onchange="chart()" /> min <input type="number" min="0" step=".50"
+    style="width:20%" id="time1b" onchange="chart()" /> sec
+  <br>
+  </div>
+  <div id="extraRow" class="display" onchange="chart()">
+  </div>
+  <div id="extraRow2" class="display" onchange="chart()">
+  </div>
+  <div  id = "canvaswrap" style="width:50%">
+  <canvas id="myChart"></canvas>
+  </div>
+
+
+</body>
+
+</html>
