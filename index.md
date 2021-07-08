@@ -29,6 +29,7 @@ _(none of this should be taken as investment advice)_
 
 ### _Other_ 
 
+- [HTML & JS Running Calculator](./runcalc.html) _- 9th March 2020_
 - [Statistical Modelling](./StatsHart01190775.pdf) _- 9th March 2020_
 - [Running Shoe Blog](http://runshoereviews.blogspot.com/?m=1) _- 10th January 2016_
 
