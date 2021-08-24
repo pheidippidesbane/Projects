@@ -31,6 +31,7 @@ _(none of this should be taken as investment advice)_
 
 - [HTML & JS Running Calculator](./runcalc.html) _- 8th July 2021_
 - [Statistical Modelling](./StatsHart01190775.pdf) _- 9th March 2020_
+- [Power of 10](https://www.thepowerof10.info/athletes/profile.aspx?athleteid=536246)
 - [Running Shoe Blog](http://runshoereviews.blogspot.com/?m=1) _- 10th January 2016_
 
 
