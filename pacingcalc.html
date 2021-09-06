@@ -1,0 +1,425 @@
+<html>
+<head>
+  <title>Pheidippidies' Bane's Pacing Calculator </title>
+  <meta name=viewport content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" type="text/css" href="/static/style.css">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chartjs-adapter-moment@0.1.1"></script>
+  <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.6.2/jquery.js"></script>
+  <script src="/static/jquery.transform2d.js"></script>
+  <script type="text/javascript">
+    var rows = 1
+    var doneOnce = 0
+    function addrow() {
+      rows++
+      var HtmlContent = "<tr><td><input type='number' id = 'd"+rows+"'/></td><td><input type='number' id = 'g"+rows+"'/></td><td><input type='number' id = 'w"+rows+"'/></td><td><input type='number' id = 'o"+rows+"'/></td></tr>"
+      var tableRef = document.getElementById('course').getElementsByTagName('tbody')[0]
+      var newRow = tableRef.insertRow(tableRef.rows.length)
+      newRow.innerHTML = HtmlContent
+                      }
+
+    function optimise() {
+      //window.alert("optimising")
+      var constantPowers = iterateConstantPower()
+      var optimumPowers = iterateOptimumPower(constantPowers)
+      try {displayResults(constantPowers, optimumPowers)}
+      catch(err) {window.alert(err.message)}
+      //window.alert(optimumPowers)
+                        }
+
+    function displayResults(constantPowers, optimumPowers) {
+      var header = "<tr><th>Distance (m)</th><th>Gradient (%)</th><th>Wind Speed (kmph)</th><th>Wind Direction (0<sup>o </sup> is a direct headwind)</th><th>Power (Watts)</th><th>Speed (kmph)</th><th>Time (s)</th></tr>"
+      var constantTableRef = document.getElementById('constant').getElementsByTagName('tbody')[0]
+      constantTableRef.innerHTML = ""
+      var constantNewRow = constantTableRef.insertRow(constantTableRef.rows.length)
+      document.getElementById("constantTitle").innerHTML = "<b> Constant Power </b>"
+      constantNewRow.innerHTML = header
+      var optimumTableRef = document.getElementById('optimum').getElementsByTagName('tbody')[0]
+      optimumTableRef.innerHTML = ""
+      var optimumNewRow = optimumTableRef.insertRow(optimumTableRef.rows.length)
+      document.getElementById("optimumTitle").innerHTML = "<b> Optimised Power </b>"
+      optimumNewRow.innerHTML = header
+      var constantHtmlTable = ""
+      var optimumHtmlTable = ""
+      var listCourse = getCourse()
+      var listDistance = listCourse[0]
+      var listGradients = listCourse[1]
+      var listWinds = listCourse[2]
+      var listDirections = listCourse[3]
+      var {listSpeeds, listTimes} = calcSpeedsTimes(constantPowers, listCourse)
+      var listConstantSpeeds = listSpeeds
+      var listConstantTimes = listTimes
+      var constantAveragePower = averagePower(constantPowers, listTimes)
+      var constantNormalisedPower = normalisedPower(constantPowers, listTimes)
+      var constantTotalTime = sumList(listTimes)
+      var constantAverageSpeed = averagePower(listSpeeds, listTimes)
+      var {listSpeeds, listTimes} = calcSpeedsTimes(optimumPowers, listCourse)
+      var listOptimumSpeeds = listSpeeds
+      var listOptimumTimes = listTimes
+      var optimumAveragePower = averagePower(optimumPowers, listTimes)
+      var optimumNormalisedPower = normalisedPower(optimumPowers, listTimes)
+      var optimumTotalTime = sumList(listTimes)
+      var optimumAverageSpeed = averagePower(listSpeeds, listTimes)
+      for (var i=0; i< rows; i++) {
+        constantHtmlTable = "<tr><td>" + listDistance[i] + "</td><td>" + listGradients[i] + "</td><td>" + listWinds[i] + "</td><td>" + listDirections[i] + "</td><td>" + (constantPowers[i]).toPrecision(4) + "</td><td>" + (listConstantSpeeds[i]*3.6).toPrecision(3) + "</td><td>" + (listConstantTimes[i]).toString().toMMSS() + "</td></tr>"
+        optimumHtmlTable = "<tr><td>" + listDistance[i] + "</td><td>" + listGradients[i] + "</td><td>" + listWinds[i] + "</td><td>" + listDirections[i] + "</td><td>" + (optimumPowers[i]).toPrecision(4) + "</td><td>" + (listOptimumSpeeds[i]*3.6).toPrecision(3) + "</td><td>" + (listOptimumTimes[i]).toString().toMMSS() + "</td></tr>"
+        var constantNewRow = constantTableRef.insertRow(constantTableRef.rows.length)
+        var optimumNewRow = optimumTableRef.insertRow(optimumTableRef.rows.length)
+        constantNewRow.innerHTML = constantHtmlTable
+        optimumNewRow.innerHTML = optimumHtmlTable
+                                  }
+      document.getElementById("constantSummary").innerHTML = `
+      <table>
+        <tr>
+          <td>Average Power (Watts): </td>
+          <td> ${constantAveragePower.toPrecision(4)}</td>
+        </tr>
+        <tr>
+          <td>Normalised Power (Watts): </td>
+          <td> ${constantNormalisedPower.toPrecision(4)}</td>
+        </tr>
+        <tr>
+          <td>Total Time (s): </td>
+          <td> ${constantTotalTime.toString().toMMSS()}</td>
+        </tr>
+          <td>Average Speed (kmph): </td>
+          <td> ${(constantAverageSpeed*3.6).toPrecision(3)}</td>
+        </tr>
+      </table>
+      `
+      document.getElementById("optimumSummary").innerHTML = `
+      <table>
+        <tr>
+          <td>Average Power (Watts): </td>
+          <td> ${optimumAveragePower.toPrecision(4)}</td>
+        </tr>
+        <tr>
+          <td>Normalised Power (Watts): </td>
+          <td> ${optimumNormalisedPower.toPrecision(4)}</td>
+        </tr>
+        <tr>
+          <td>Total Time (s): </td>
+          <td> ${optimumTotalTime.toString().toMMSS()}</td>
+        </tr>
+        <tr>
+          <td>Average Speed (kmph): </td>
+          <td> ${(optimumAverageSpeed*3.6).toPrecision(3)}</td>
+        </tr>
+      </table>
+      `
+                                                            }
+
+    function sumList(listToSum) {
+      sumOut = 0
+      for(var i=0; i< listToSum.length; i++) {
+        sumOut += listToSum[i]
+                                              }
+      return sumOut
+                                }
+
+
+    function averagePower(listPowers, listTimes) {
+      var sumProd = 0
+      var sumTimes = 0
+      for(var i=0; i< listPowers.length; i++) {
+        sumProd += listPowers[i]*listTimes[i]
+        sumTimes += listTimes[i]
+                                              }
+      return sumProd / sumTimes
+                                                 }
+
+    function normalisedPower(listPowers, listTimes) {
+      var sumProd = 0
+      var sumTimes = 0
+      for(var i=0; i< listPowers.length; i++) {
+        sumProd += (listPowers[i] ** 4) * listTimes[i]
+        sumTimes += listTimes[i]
+                                              }
+      return (sumProd / sumTimes)**(1/4)
+                                                    }
+
+    function criticalPower(CP1, T1, T2) {
+      return CP1 * (T1/T2) ** (Math.log(0.95) / Math.log(1/3))
+                                        }
+
+    function sectionSpeed(power, slope, wind, CdA, tyre, mass, density, efficiency) { // metres per second
+      var gravity = 9.81
+      var a = 0.5 * CdA * density
+      //window.alert("a is " + a)
+      var b = wind * density * CdA
+      //window.alert("b is " + b)
+      var c = (0.5 * (wind ** 2) * density * CdA) + (gravity * mass * Math.sin(Math.atan(slope)))
+      //window.alert("c is " + c)
+      var d = tyre - (efficiency * power)
+      //window.alert("d is " + d)
+      //window.alert("Cubic Parameters Calculated")
+      var roots = CubicSolve(a, b, c, d)
+      //window.alert("Cubic Equation Solved")
+      return roots
+                                                               }
+
+    function calcSpeedsTimes(listPowers, listCourse) {
+      var listDistance = listCourse[0]
+      var listGradients = listCourse[1]
+      var listWinds = listCourse[2]
+      var listDirections = listCourse[3]
+      //window.alert("Course Elements Disected")
+      var CdA = document.getElementById('CdA').value
+      var tyre = document.getElementById('Tyre').value
+      var mass = document.getElementById('Mass').value
+      var density = document.getElementById('Density').value
+      var efficiency = document.getElementById('Drivetrain').value
+      //window.alert("Competitor Inputs Parsed")
+      var listDirectWinds = []
+      var listSpeeds = []
+      var listTimes = []
+      for(var i=0; i< listPowers.length; i++) {
+        listDirectWinds.push(listWinds[i] * Math.cos(listDirections[i]*Math.PI/180)) //metres per second
+        //window.alert("Direct Wind Calculated")
+        //window.alert([listPowers[i], listGradients[i]/100, listDirectWinds[i], CdA, tyre, mass, density, efficiency/100])
+        var roots = sectionSpeed(listPowers[i], listGradients[i]/100, listDirectWinds[i], CdA, tyre, mass, density, efficiency/100)
+        //window.alert("Roots Calculated")
+        var secSpeed = roots[0].real
+        //window.alert("Section Speed Calculated " + secSpeed)
+        var secTime = listDistance[i]/secSpeed
+        //window.alert("Section Time Calculated" + secTime)
+        listSpeeds.push(secSpeed)
+        listTimes.push(secTime)
+        //window.alert("Section " + (i+1) + " Calculated")
+                                              }
+      return {listSpeeds, listTimes}
+                                                      }
+
+    function getCourse() {
+      var listPrefixes = ['d','g','w','o']
+      var listDistance = []
+      var listGradients = []
+      var listWinds = []
+      var listDirections = []
+      for (var i=1; i< rows+1; i++) {
+        listDistance.push(document.getElementById('d'+i).value)
+        listGradients.push(document.getElementById('g'+i).value)
+        listWinds.push(document.getElementById('w'+i).value)
+        listDirections.push(document.getElementById('o'+i).value)
+                                  }
+      var listCourse = [listDistance, listGradients, listWinds, listDirections]
+      return listCourse
+                         }
+
+    function generateInitialPowers() {
+      var FTP = document.getElementById('FTP').value
+      var initialPowers = []
+      for (var i=1; i< rows+1; i++) {
+        initialPowers.push(FTP)
+                                    }
+      return initialPowers
+                                     }
+
+    function scalePowers(listPowers) {
+      var listCourse = getCourse()
+      //window.alert("Course Got")
+      var {listSpeeds, listTimes} = calcSpeedsTimes(listPowers, listCourse)
+      //window.alert("Speeds are " + listSpeeds)
+      //window.alert("Total times are " + listTimes)
+      //window.alert("Speeds and Times Calculated")
+      var totalTime = sumList(listTimes) //seconds
+      //window.alert("Total Time Calculated")
+      var npActual = normalisedPower(listPowers, listTimes)
+      var FTP = document.getElementById('FTP').value
+      var FTPtime = document.getElementById('FTPtime').value
+      //window.alert([FTP, FTPtime * 60, totalTime])
+      var npPossible = criticalPower(FTP, FTPtime * 60, totalTime)
+      //window.alert("NP Possible is " + npPossible)
+      var listPowersNew = []
+      for(var i=0; i< listPowers.length; i++) {
+        listPowersNew.push((listPowers[i]*npPossible / npActual))
+                                              }
+      //window.alert(listPowersNew)
+      return listPowersNew
+                           }
+
+    function iterateConstantPower() {
+      var listPowers = generateInitialPowers()
+      //window.alert("Initial Powers Generated")
+      for(var i=0; i< 5; i++) {
+        listPowers = scalePowers(listPowers)
+        listPowers = scalePowers(listPowers)
+        //window.alert(i)
+                                }
+      return listPowers
+                                    }
+
+    function evolvePowers(listPowers, listCourse) {
+      for(var i=0; i< listPowers.length; i++) {
+        var {listSpeeds, listTimes} = calcSpeedsTimes(listPowers, listCourse)
+        var totalTime = sumList(listTimes)
+        listPowers[i] *= 1.001
+        listPowers = scalePowers(listPowers)
+        listPowers = scalePowers(listPowers)
+        var {listSpeeds, listTimes} = calcSpeedsTimes(listPowers, listCourse)
+        var newTotalTime = sumList(listTimes)
+        if (newTotalTime < totalTime) {}
+          else {
+            listPowers[i] *= 0.999
+            listPowers = scalePowers(listPowers)
+            listPowers = scalePowers(listPowers)
+               }
+                                              }
+      return listPowers
+                                                  }
+
+    function iterateOptimumPower(listPowers) {
+      listCourse = getCourse()
+      for(var i=0; i< 10000; i++) {
+        listPowers = evolvePowers(listPowers, listCourse)
+                                }
+      return listPowers
+                                              }
+
+    function CubicSolve(a, b, c, d) {
+      b /= a
+      c /= a
+      d /= a
+      var discrim, q, r, dum1, s, t, term1, r13
+      q = (3.0*c - (b*b))/9.0
+      r = -(27.0*d) + b*(9.0*c - 2.0*(b*b))
+      r /= 54.0
+      discrim = q*q*q + r*r
+      var roots = [ {real: 0, i: 0}, {real: 0, i: 0}, {real: 0, i: 0} ]
+      term1 = (b/3.0)
+      if (discrim > 0) { // one root real, two are complex
+       s = r + Math.sqrt(discrim)
+       s = ((s < 0) ? -Math.pow(-s, (1.0/3.0)) : Math.pow(s, (1.0/3.0)))
+       t = r - Math.sqrt(discrim)
+       t = ((t < 0) ? -Math.pow(-t, (1.0/3.0)) : Math.pow(t, (1.0/3.0)))
+       roots[0].real = -term1 + s + t
+       term1 += (s + t)/2.0
+       roots[2].real = roots[1].real = -term1
+       term1 = Math.sqrt(3.0)*(-t + s)/2
+       roots[1].i = term1
+       roots[2].i = -term1
+       return roots
+      } // End if (discrim > 0)
+      // The remaining options are all real
+      if (discrim == 0){ // All roots real, at least two are equal.
+       r13 = ((r < 0) ? -Math.pow(-r,(1.0/3.0)) : Math.pow(r,(1.0/3.0)))
+       roots[0].real = -term1 + 2.0*r13
+       roots[2].real = roots[1].real = -(r13 + term1)
+       return roots
+      } // End if (discrim == 0)
+      // Only option left is that all roots are real and unequal (to get here, q < 0)
+      q = -q
+      dum1 = q*q*q
+      dum1 = Math.acos(r/Math.sqrt(dum1))
+      r13 = 2.0*Math.sqrt(q)
+      roots[0].real = -term1 + r13*Math.cos(dum1/3.0)
+      roots[1].real = -term1 + r13*Math.cos((dum1 + 2.0*Math.PI)/3.0)
+      roots[2].real = -term1 + r13*Math.cos((dum1 + 4.0*Math.PI)/3.0)
+      return roots
+                                    }
+
+    function getBaseLog(x, y) {
+      return Math.log(y) / Math.log(x)
+                              }
+
+    String.prototype.toHHMMSS = function () {
+      var sec_num = parseInt(this, 10) // don't forget the second param
+      var hours   = Math.floor(sec_num / 3600)
+      var minutes = Math.floor((sec_num - (hours * 3600)) / 60)
+      var seconds = sec_num - (hours * 3600) - (minutes * 60)
+      if (hours   < 10) {hours   = "0"+hours}
+      if (minutes < 10) {minutes = "0"+minutes}
+      if (seconds < 10) {seconds = "0"+seconds}
+      return hours+':'+minutes+':'+seconds
+                                            }
+
+    String.prototype.toMMSS = function () {
+      var sec_num = parseInt(this, 10) // don't forget the second param
+      var hours   = Math.floor(sec_num / 3600)
+      var minutes = Math.floor((sec_num - (hours * 3600)) / 60)
+      var seconds = sec_num - (hours * 3600) - (minutes * 60)
+      if (hours   < 10) {hours   = "0"+hours}
+      if (minutes < 10) {minutes = "0"+minutes}
+      if (seconds < 10) {seconds = "0"+seconds}
+      return minutes+':'+seconds                                
+                                          }
+  </script>
+</head>
+
+<body background="./images/run_track.jpg">
+  <br>
+  <p> <b> Use this tool to optimise time-trial power for a windy/hilly course. </b> </p>
+  <p> <b> Competitor Inputs: </b> </p>
+  <table>
+  <tr>
+    <td>FTP (or other duration)</td>
+    <td><input type='number' id = 'FTP' step='1' name='FTP' value='300'/></td>
+    <td>Watts for</td>
+    <td><input type='number' id = 'FTPtime' step='1' name='FTPtime' value='60'/></td>
+    <td>minutes</td>
+  </tr>
+  <tr>
+    <td>CdA</td>
+    <td><input type='number' id = 'CdA' step='.001' name='CdA' value='0.25'/></td>
+    <td>m<sup>2 </sup></td>
+    <td><a href="https://www.sciencedirect.com/science/article/pii/S0167610518305762">     CdA examples</a>&nbsp;&nbsp;</td>
+  </tr>
+  <tr>
+    <td>Density</td>
+    <td><input type='number' id = 'Density' step='.001' name='Density' value='1'/></td>
+    <td>kg m<sup>-3 </sup></td>
+  </tr>
+  <tr>
+    <td>System Mass</td>
+    <td><input type='number' id = 'Mass' step='.1' name='Mass' value='80'/></td>
+    <td>kg</td>
+  </tr>
+  <tr>
+    <td>Tyres Watts Lost</td>
+    <td><input type='number' id = 'Tyre' step='.1' name='Tyre' value='20'/></td>
+    <td>Watts</td>
+    <td><a href="https://www.bicyclerollingresistance.com/road-bike-reviews">     Tyre Watts</a>&nbsp;&nbsp;</td>
+  </tr>
+  <tr>
+    <td>Drivetrain Efficiency</td>
+    <td><input type='number' id = 'Drivetrain' step='.1' name='Drivetrain' value='96'/></td>
+    <td>%</td>
+  </tr>
+  </table>
+
+  <p> <b> Course Specification: </b> </p>
+
+  <table id = "course">
+    <tr>
+      <th>Distance (m)</th>
+      <th>Gradient (%)</th>
+      <th>Wind Speed (kmph)</th>
+      <th>Wind Direction (0<sup>o </sup> is a direct headwind)</th>
+    </tr>
+    <tr>
+      <td><input type='number' id = 'd1'/></td>
+      <td><input type='number' id = 'g1'/></td>
+      <td><input type='number' id = 'w1'/></td>
+      <td><input type='number' id = 'o1'/></td>
+    </tr>
+  </table>
+  <button id="new_row_button" style="cursor: pointer;" onclick="addrow()"> Add Row</button>
+  <button id="new_row_button" style="cursor: pointer;" onclick="optimise()"> Optimise</button>
+  <br>
+  <br>
+  <div id = "constantTitle"> </div>
+  <table id = "constantSummary">
+  </table>
+  <table id = "constant">
+    <tr></tr>
+  </table>
+  <br>
+  <div id = "optimumTitle"> </div>
+  <table id = "optimumSummary">
+  </table>
+  <table id = "optimum">
+    <tr></tr>
+  </table>
+</body>
+</html>
