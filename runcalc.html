@@ -1,11 +1,10 @@
 
-<html>
-
-<head>
+<!-- saved from url=(0056)https://pheidippidesbane.github.io/Projects/runcalc.html -->
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
   <title>Pheidippidies' Bane's Time Calculator </title>
-  <link rel="shortcut icon" type="image/jpg" href="favicon.ico"/>
-  <meta name=viewport content="width=device-width, initial-scale=1">
-  <link rel="stylesheet" type="text/css" href="/static/style.css">
+  <link rel="shortcut icon" type="image/jpg" href="https://pheidippidesbane.github.io/Projects/favicon.ico">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" type="text/css" href="./Pheidippidies&#39; Bane&#39;s Time Calculator_files/style.css">
 <!--
   <script type="text/javascript">
     function addrow() {
@@ -57,7 +56,7 @@
         var percent_max1 = 0.8 + 0.1894393 * Math.pow(Math.E, (-0.012778 * t1 /60)) + 0.2989558 * Math.pow(Math.E, (-0.1932605 * t1 / 60));
         var vo21 = -4.60 + 0.182258 * velocity1 + 0.000104 * Math.pow(velocity1, 2);
         var vo2max1 = vo21 / percent_max1;
-        var time = t1;
+        var time = t1 + 0.01;
         if (distance > d1) {
           var vo2max2 = 200
           while (vo2max2 > vo2max1) {
@@ -65,7 +64,7 @@
                                     var percent_max2 = 0.8 + 0.1894393 * Math.pow(Math.E, (-0.012778 * time / 60)) + 0.2989558 * Math.pow(Math.E, (-0.1932605 * time / 60));
                                     var vo22 = -4.60 + 0.182258 * velocity2 + 0.000104 * Math.pow(velocity2, 2);
                                     var vo2max2 = vo22 / percent_max2;
-                                    time++;
+                                    time = time + 0.01;
                                     }
                             }
         else                {
@@ -75,7 +74,7 @@
                                     var percent_max2 = 0.8 + 0.1894393 * Math.pow(Math.E, (-0.012778 * time / 60)) + 0.2989558 * Math.pow(Math.E, (-0.1932605 * time / 60));
                                     var vo22 = -4.60 + 0.182258 * velocity2 + 0.000104 * Math.pow(velocity2, 2);
                                     var vo2max2 = vo22 / percent_max2;
-                                    time--;
+                                    time = time - 0.01;
                                     }
                             }
     }
@@ -107,11 +106,11 @@
                                       return {percent_max2, vo22, vo2max2}
                                   }
   </script>
-  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/chartjs-adapter-moment@0.1.1"></script>
-  <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.6.2/jquery.js"></script>
-  <script src="/static/jquery.transform2d.js"></script>
+  <script src="./Pheidippidies&#39; Bane&#39;s Time Calculator_files/chart.js.download"></script>
+  <script src="./Pheidippidies&#39; Bane&#39;s Time Calculator_files/moment.min.js.download"></script>
+  <script src="./Pheidippidies&#39; Bane&#39;s Time Calculator_files/chartjs-adapter-moment@0.1.1"></script>
+  <script src="./Pheidippidies&#39; Bane&#39;s Time Calculator_files/jquery.js.download"></script>
+  <script src="./Pheidippidies&#39; Bane&#39;s Time Calculator_files/jquery.transform2d.js.download"></script>
   <script>
 // function chart() {
 // var distancelist = [400,800,5000,10000,21097,42195]
@@ -144,7 +143,7 @@
 
 function chart() {
 // var distancelist = [100,200,400,800,1000,1500,1609,2000,3000,5000,8047,10000,15000,16093,20000,21097,25000,30000,40000,42195,50000,100000];
-var distancelist = [400,800,1000,1500,1609,3000,5000,10000,16093,21097,30000,42195];
+var distancelist = [400,800,1000,1500,1609,3000,5000,10000,16093,21097,30000,42195,58180];
 if (calculate_pure(10000) > 20*60) {
 var dummy_kms = 5
 var dummy_time = calculate_pure(dummy_kms*1000)
@@ -305,32 +304,36 @@ chart.update();
 }
 
 String.prototype.toHHMMSS = function () {
-    var sec_num = parseInt(this, 10); // don't forget the second param
+    var sec_num = parseFloat(this).toFixed(1); // don't forget the second param
     var hours   = Math.floor(sec_num / 3600);
     var minutes = Math.floor((sec_num - (hours * 3600)) / 60);
-    var seconds = sec_num - (hours * 3600) - (minutes * 60);
+    var seconds = (sec_num - (hours * 3600) - (minutes * 60)).toFixed(1);
 
-    if (hours   < 10) {hours   = "0"+hours;}
+    if (hours   < 10) {hours   = hours;}
     if (minutes < 10) {minutes = "0"+minutes;}
     if (seconds < 10) {seconds = "0"+seconds;}
-    return hours+':'+minutes+':'+seconds;
+    if (hours == "00") {return minutes+':'+seconds;} else {return hours+':'+minutes+':'+seconds;}
 }
 String.prototype.toMMSS = function () {
-    var sec_num = parseInt(this, 10); // don't forget the second param
+    var sec_num = parseFloat(this); // don't forget the second param
     var hours   = Math.floor(sec_num / 3600);
     var minutes = Math.floor((sec_num - (hours * 3600)) / 60);
-    var seconds = sec_num - (hours * 3600) - (minutes * 60);
+    var seconds = (sec_num - (hours * 3600) - (minutes * 60)).toFixed(1);
 
     if (hours   < 10) {hours   = "0"+hours;}
     if (minutes < 10) {minutes = "0"+minutes;}
     if (seconds < 10) {seconds = "0"+seconds;}
     return minutes+':'+seconds;
 }
+function RoundNum(num, length) { 
+    var number = Math.round(num * Math.pow(10, length)) / Math.pow(10, length);
+    return number;
+}
 </script>
 
 </head>
 
-<body background="./images/run_track.jpg">
+<body background="./Pheidippidies&#39; Bane&#39;s Time Calculator_files/run_track.jpg">
   <br>
   <div>
     <p>
@@ -349,8 +352,8 @@ String.prototype.toMMSS = function () {
   </select>
   <br>
   <br>
-  <div id = "inputs" class = "container">
-  <input id = "distance1" list="distances1" name="distance1" placeholder="Number of Metres (w/o units) or select" style="width:30%" onchange = "chart()" />
+  <div id="inputs" class="container">
+  <input id="distance1" list="distances1" name="distance1" placeholder="Number of Metres (w/o units) or select" style="width:30%" onchange="chart()">
   <datalist id="distances1">
     <option value="400">400m</option>
     <option value="800">800m</option>
@@ -364,19 +367,19 @@ String.prototype.toMMSS = function () {
     <option value="21097.494">half-marathon</option>
     <option value="42195.0">marathon</option>
   </datalist>
-  <input type="number" min="0" style="width:15%" id="time1a" onchange="chart()" /> min <input type="number" min="0" step=".50"
-    style="width:20%" id="time1b" onchange="chart()" /> sec
+  <input type="number" min="0" style="width:15%" id="time1a" onchange="chart()"> min <input type="number" min="0" step=".50" style="width:20%" id="time1b" onchange="chart()"> sec
   <br>
   </div>
   <div id="extraRow" class="display" onchange="chart()">
   </div>
   <div id="extraRow2" class="display" onchange="chart()">
   </div>
-  <div  id = "canvaswrap" style="width:50%">
+  <div id="canvaswrap" style="width:50%">
   <canvas id="myChart"></canvas>
   </div>
 
 
-</body>
 
-</html>
+
+
+</body></html>
