@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en-US">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width" />
+    <title>Rich Text Editor</title>
+    <script>
+      let doc, defTxt;
+
+      function initDoc() {
+        doc = document.getElementById("textBox");
+        defTxt = doc.innerHTML;
+        if (document.compForm.switchMode.checked) {
+          setDocMode(true);
+        }
+      }
+
+      function formatDoc(cmd, value) {
+        if (validateMode()) {
+          document.execCommand(cmd, false, value);
+          doc.focus();
+        }
+      }
+
+      function validateMode() {
+        if (!document.compForm.switchMode.checked) {
+          return true;
+        }
+        alert('Uncheck "Show HTML".');
+        doc.focus();
+        return false;
+      }
+
+      function setDocMode(toSource) {
+        let content;
+        if (toSource) {
+          content = document.createTextNode(doc.innerHTML);
+          doc.innerHTML = "";
+          const pre = document.createElement("pre");
+          doc.contentEditable = false;
+          pre.id = "sourceText";
+          pre.contentEditable = true;
+          pre.appendChild(content);
+          doc.appendChild(pre);
+          document.execCommand("defaultParagraphSeparator", false, "div");
+        } else {
+          if (document.all) {
+            doc.innerHTML = doc.innerText;
+          } else {
+            content = document.createRange();
+            content.selectNodeContents(doc.firstChild);
+            doc.innerHTML = content.toString();
+          }
+          doc.contentEditable = true;
+        }
+        doc.focus();
+      }
+
+      function printDoc() {
+        if (!validateMode()) {
+          return;
+        }
+        const printWin = window.open(
+          "",
+          "_blank",
+          "width=450,height=470,left=400,top=100,menubar=yes,toolbar=no,location=no,scrollbars=yes"
+        );
+        printWin.document.open();
+        printWin.document.write(
+          '<!doctype html><html><head><title>Print<\/title><\/head><body onload="print();">' +
+            doc.innerHTML +
+            "<\/body><\/html>"
+        );
+        printWin.document.close();
+      }
+    </script>
+    <style>
+      .intLink {
+        cursor: pointer;
+      }
+      img.intLink {
+        border: 0;
+      }
+      #toolBar1 select {
+        font-size: 10px;
+      }
+      #textBox {
+        width: 540px;
+        height: 200px;
+        border: 1px #000000 solid;
+        padding: 12px;
+        overflow: scroll;
+      }
+      #textBox #sourceText {
+        padding: 0;
+        margin: 0;
+        min-width: 498px;
+        min-height: 200px;
+      }
+      #editMode label {
+        cursor: pointer;
+      }
+    </style>
+  </head>
+  <body onload="initDoc();">
+    <form
+      name="compForm"
+      method="post"
+      action="sample.php"
+      onsubmit="if (validateMode()) { this.myDoc.value = doc.innerHTML; return true; } return false;">
+      <input type="hidden" name="myDoc" />
+      <div id="textBox" contenteditable="true">
+        <p>Lorem ipsum</p>
+      </div>
+      <p><input type="submit" value="Send" /></p>
+    </form>
+  </body>
+</html>
