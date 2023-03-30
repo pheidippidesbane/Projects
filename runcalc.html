@@ -5,21 +5,7 @@
   <link rel="shortcut icon" type="image/jpg" href="https://pheidippidesbane.github.io/Projects/favicon.ico">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" type="text/css" href="./Pheidippidies&#39; Bane&#39;s Time Calculator_files/style.css">
-<!--
-  <script type="text/javascript">
-    function addrow() {
-      if (document.getElementById("method").value == "onepoint") {
-      document.getElementById("extraRow").innerHTML = " Exponential Factor <input type='number' min='0' step = 0.001 style='width:15%' placeholder = 1.06 id='exponentialFactor' onchange='chart()'/> <br>";
-    } else if (document.getElementById("method").value == "twopoint") {
-      document.getElementById("extraRow").innerHTML = "<input id = 'distance2' list='distances2' name='distance2' placeholder='Number of Metres (w/o units) or select' style='width:30%'/> <datalist id='distances2'> <option value='400'>400m</option> <option value='800'>800m</option> <option value='1000'>1000m</option> <option value='1500'>1500m</option> <option value='1609'>1-mile</option> <option value='3000'>3000m</option> <option value='3218'>2-mile</option> <option value='5000'>5000m</option> <option value='10000'>10000m</option> <option value='21097.494'>half-marathon</option> <option value='42195.0'>marathon</option> </datalist> <input type='number' min='0' style='width:15%' id='time2a' /> min <input type='number' min='0' step='.50' style='width:20%' id='time2b' /> sec<br>";
-    } else if (document.getElementById("method").value == "vdot") {
-      document.getElementById("extraRow").innerHTML = ""
-    } else if (document.getElementById("method").value == "kellog") {
-      document.getElementById("extraRow").innerHTML = ""
-    }
-  }
-  </script>
--->
+
   <script type="text/javascript">
     function addrow() {
       if (document.getElementById("method").value == "onepoint") {
@@ -112,38 +98,15 @@
   <script src="./Pheidippidies&#39; Bane&#39;s Time Calculator_files/jquery.js.download"></script>
   <script src="./Pheidippidies&#39; Bane&#39;s Time Calculator_files/jquery.transform2d.js.download"></script>
   <script>
-// function chart() {
-// var distancelist = [400,800,5000,10000,21097,42195]
-// var timelist = distancelist.map(calculate)
-// var ctx = document.getElementById('myChart').getContext('2d');
-// var config = {
-//     type: 'line',
-//     data: {
-//         labels: distancelist,
-//         datasets: [{
-//             label: Number(document.getElementById("distance1").value),//'Time',
-//             data: timelist,
-//             backgroundColor: 'rgba(255, 99, 132, 0.2)',
-//             borderColor: 'rgba(255, 99, 132, 1)',
-//             borderWidth: 1
-//         }]
-//     },
-//     options: {
-//         scales: {
-//             y: {
-//                 beginAtZero: true
-//             }
-//         }
-//     }
-// };
-// var chart = new Chart(ctx, config);
-// chart.destroy()
-// var chart = new Chart(ctx, config);
-// };
 
+var distancelist = [1500,1609,3000,5000,10000,21097,42195];
+function addDistance() {
+var extraDistance = Number(document.getElementById("extraDistance").value)
+distancelist.push(extraDistance)
+distancelist.sort(function(a, b){return a-b})
+chart()
+}
 function chart() {
-// var distancelist = [100,200,400,800,1000,1500,1609,2000,3000,5000,8047,10000,15000,16093,20000,21097,25000,30000,40000,42195,50000,100000];
-var distancelist = [400,800,1000,1500,1609,3000,5000,10000,16093,21097,30000,42195,58180];
 if (calculate_pure(10000) > 20*60) {
 var dummy_kms = 5
 var dummy_time = calculate_pure(dummy_kms*1000)
@@ -157,8 +120,9 @@ while (dummy_time < 3600) {
   var dummy_time = calculate_pure(dummy_distance)
   dummy_distance++
 }
-distancelist.push(dummy_distance)
-distancelist.sort(function(a, b){return a-b})
+var locdistancelist = distancelist.slice()
+locdistancelist.push(dummy_distance)
+locdistancelist.sort(function(a, b){return a-b})
                                     }
 var html1 = `
 <table>
@@ -173,7 +137,7 @@ var html1 = `
         <tbody>
 `
 
-for (distance of distancelist) {
+for (distance of locdistancelist) {
   html1 += `
             <tr>
                 <td>${distance}</td>
@@ -192,7 +156,7 @@ for (distance of distancelist) {
         </thead>
         <tbody>
         `
-for (distance of distancelist) {
+for (distance of locdistancelist) {
   html1 += `
             <tr>
                 <td>${calc_pace(distance)}</td>
@@ -211,7 +175,7 @@ for (distance of distancelist) {
         </thead>
         <tbody>
         `
-for (distance of distancelist) {
+for (distance of locdistancelist) {
   html1 += `
             <tr>
                 <td>${calculate(distance)}</td>
@@ -230,7 +194,7 @@ for (distance of distancelist) {
         </thead>
         <tbody>
         `
-for (distance of distancelist) {
+for (distance of locdistancelist) {
   html1 += `
             <tr>
                 <td>${Number.parseFloat(calc_vo2(distance).vo22).toPrecision(3)}</td>
@@ -249,7 +213,7 @@ for (distance of distancelist) {
         </thead>
         <tbody>
         `
-for (distance of distancelist) {
+for (distance of locdistancelist) {
   html1 += `
             <tr>
                 <td>${Number.parseFloat(calc_vo2(distance).percent_max2).toPrecision(3)}</td>
@@ -262,8 +226,8 @@ for (distance of distancelist) {
 </table>`
 document.getElementById("extraRow2").innerHTML = html1
 $("#canvaswrap").html("").html('<canvas id="myChart"></canvas>');
-var timelist = distancelist.map(calculate)
-var pacelist = distancelist.map(calc_pace)
+var timelist = locdistancelist.map(calculate)
+var pacelist = locdistancelist.map(calc_pace)
 var canvas = document.getElementById("myChart");
 var ctx = canvas.getContext("2d");
 var config = {
@@ -272,7 +236,7 @@ var config = {
         labels: pacelist,
         datasets: [{
             label: "",//Number(document.getElementById("distance1").value),//'Time',
-            data: distancelist,
+            data: locdistancelist,
             backgroundColor: 'rgba(255, 99, 132, 0.2)',
             borderColor: 'rgba(255, 99, 132, 1)',
             borderWidth: 1
@@ -298,7 +262,7 @@ var config = {
           };
 var chart = new Chart(ctx, config);
 chart.data.labels = pacelist;
-chart.data.datasets[0].data = distancelist;
+chart.data.datasets[0].data = locdistancelist;
 chart.update();
 //distancelist.map(calculate)
 }
