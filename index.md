@@ -34,6 +34,7 @@ _(none of this should be taken as investment advice)_
 - [Statistical Modelling](./StatsHart01190775.pdf) _- 9th March 2020_
 - [Power of 10](https://www.thepowerof10.info/athletes/profile.aspx?athleteid=536246)
 - [Trois Monts Report](./Mont_Blanc_3_Monts_Report.pdf) & [Video](https://www.youtube.com/watch?v=00GsWVofAOg&fbclid=IwAR01576IabQFfcu9wyty4LUuxUqmqIjRXuaiyuKoi6tV5gIImYcL-SMNLnc&ab_channel=ICXCTrailChannel)
+- [Frankfurt Marathon Report](./Account.pdf)
 - [Running Shoe Blog](http://runshoereviews.blogspot.com/?m=1) _- 10th January 2016_
 
 
