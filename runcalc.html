@@ -91,6 +91,14 @@
                                             }
                                       return {percent_max2, vo22, vo2max2}
                                   }
+
+    function calc_speed(distance) {
+                                      var time = calculate_pure(distance);
+                                      var time_hours = time / 3600;
+                                      var distance_km = distance / 1000;
+                                      var speed = distance_km / time_hours;
+                                      return speed.toFixed(2);
+                                  }
   </script>
   <script src="./Pheidippidies&#39; Bane&#39;s Time Calculator_files/chart.js.download"></script>
   <script src="./Pheidippidies&#39; Bane&#39;s Time Calculator_files/moment.min.js.download"></script>
@@ -156,6 +164,7 @@ for (distance of locdistancelist) {
         </thead>
         <tbody>
         `
+
 for (distance of locdistancelist) {
   html1 += `
             <tr>
@@ -175,6 +184,7 @@ for (distance of locdistancelist) {
         </thead>
         <tbody>
         `
+
 for (distance of locdistancelist) {
   html1 += `
             <tr>
@@ -194,6 +204,7 @@ for (distance of locdistancelist) {
         </thead>
         <tbody>
         `
+
 for (distance of locdistancelist) {
   html1 += `
             <tr>
@@ -213,6 +224,7 @@ for (distance of locdistancelist) {
         </thead>
         <tbody>
         `
+
 for (distance of locdistancelist) {
   html1 += `
             <tr>
@@ -223,7 +235,30 @@ for (distance of locdistancelist) {
         </tbody>
     </table>
 </td>
+<td>
+    <table>
+        <thead>
+            <tr>
+                <td nowrap="nowrap">Speed (km/h)</td>
+            </tr>
+        </thead>
+        <tbody>
+        `
+
+for (distance of locdistancelist) {
+  html1 += `
+            <tr>
+                <td>${calc_speed(distance)}</td>
+                `
+}
+  html1 +=  `</tr>
+        </tbody>
+    </table>
+</td>
 </table>`
+
+
+
 document.getElementById("extraRow2").innerHTML = html1
 $("#canvaswrap").html("").html('<canvas id="myChart"></canvas>');
 var timelist = locdistancelist.map(calculate)
