@@ -11,7 +11,7 @@
       if (document.getElementById("method").value == "onepoint") {
       document.getElementById("extraRow").innerHTML ="Expontial Factor <input type='number' min='1' id = 'exponentialFactor' step='.001' name='exponentialFactor' value='1.06' />"
     } else if (document.getElementById("method").value == "twopoint") {
-      document.getElementById("extraRow").innerHTML = "<input id = 'distance2' list='distances2' name='distance2' placeholder='Number of Metres (w/o units) or select' style='width:30%'/> <datalist id='distances2'> <option value='400'>400m</option> <option value='800'>800m</option> <option value='1000'>1000m</option> <option value='1500'>1500m</option> <option value='1609'>1-mile</option> <option value='3000'>3000m</option> <option value='3218'>2-mile</option> <option value='5000'>5000m</option> <option value='10000'>10000m</option> <option value='21097.494'>half-marathon</option> <option value='42195.0'>marathon</option> </datalist> <input type='number' min='0' style='width:15%' id='time2a' /> min <input type='number' min='0' step='1' style='width:20%' id='time2b' /> sec<br>";
+      document.getElementById("extraRow").innerHTML = "<input id = 'distance2' list='distances2' name='distance2' placeholder='Number of Metres (w/o units) or select' style='width:10%'/> <datalist id='distances2'> <option value='400'>400m</option> <option value='800'>800m</option> <option value='1000'>1000m</option> <option value='1500'>1500m</option> <option value='1609'>1-mile</option> <option value='3000'>3000m</option> <option value='3218'>2-mile</option> <option value='5000'>5000m</option> <option value='10000'>10000m</option> <option value='21097.494'>half-marathon</option> <option value='42194.988'>marathon</option> </datalist> <input type='number' min='0' style='width:10%' id='time2a' /> min <input type='number' min='0' step='1' style='width:10%' id='time2b' /> sec<br>";
     } else if (document.getElementById("method").value == "vdot") {
       document.getElementById("extraRow").innerHTML = ""
     }
@@ -27,6 +27,10 @@
     function calculate_pure(distance) {
       var d1 = Number(document.getElementById("distance1").value);
       var t1 = Number(document.getElementById("time1a").value) * 60.0 + Number(document.getElementById("time1b").value);
+      var velocity1 = d1 * 60/ t1;
+      var percent_max1 = 0.8 + 0.1894393 * Math.pow(Math.E, (-0.012778 * t1 /60)) + 0.2989558 * Math.pow(Math.E, (-0.1932605 * t1 / 60));
+      var vo21 = -4.60 + 0.182258 * velocity1 + 0.000104 * Math.pow(velocity1, 2);
+      var vo2max1 = vo21 / percent_max1;
       document.getElementById.innerHTML += "t1"
       if (document.getElementById("method").value == "onepoint") {
         var exp = Number(document.getElementById("exponentialFactor").value);
@@ -38,10 +42,6 @@
         var exp = getBaseLog(d1/d2, t1/t2);
         var time = t1 * (Math.pow(distance/d1, exp));
     } else if (document.getElementById("method").value == "vdot") {
-        var velocity1 = d1 * 60/ t1;
-        var percent_max1 = 0.8 + 0.1894393 * Math.pow(Math.E, (-0.012778 * t1 /60)) + 0.2989558 * Math.pow(Math.E, (-0.1932605 * t1 / 60));
-        var vo21 = -4.60 + 0.182258 * velocity1 + 0.000104 * Math.pow(velocity1, 2);
-        var vo2max1 = vo21 / percent_max1;
         var time = t1;
         if (distance > d1) {
           var vo2max2 = 200
@@ -76,20 +76,65 @@
                                       var pace = time * 1000 / distance
                                       return pace.toString().toMMSS()
                                   }
+    function calc_pace_mile(distance) {
+                                      var time = calculate_pure(distance)
+                                      var pace = time * 1000 * 1.609344 / distance
+                                      return pace.toString().toMMSS()
+                                  }
     function calc_vo2(distance) {
                                       var time = calculate_pure(distance)
                                       var velocity2 = distance * 60 / time
                                       var percent_max2 = 0.8 + 0.1894393 * Math.pow(Math.E, (-0.012778 * time / 60)) + 0.2989558 * Math.pow(Math.E, (-0.1932605 * time / 60));
                                       var vo22 = -4.60 + 0.182258 * velocity2 + 0.000104 * Math.pow(velocity2, 2);
                                       var vo2max2 = vo22 / percent_max2;
-                                      if (percent_max2 > 1) {
-                                                              percent_max2 = 100
-                                                              vo22 = vo2max2
-                                                            }
-                                      else {
-                                                              percent_max2 = 100 * percent_max2
-                                            }
+                                      percent_max2 = 100 * percent_max2
                                       return {percent_max2, vo22, vo2max2}
+                                  }
+    function calc_vo2_clean(distance) {
+                                      var pm = calc_vo2(distance).percent_max2
+                                      if(pm > 100.1) {
+                                        var percent_max_clean = "<br>"
+                                        var vo2_clean = "<br>"
+                                      } else {
+                                        var percent_max_clean = Number.parseFloat(calc_vo2(distance).percent_max2).toPrecision(3)
+                                        var vo2_clean = Number.parseFloat(calc_vo2(distance).vo22).toPrecision(3)
+                                      }
+                                      return {percent_max_clean, vo2_clean}
+                                      }
+    function calc_distance_LT(distance) {
+                                      var vo2max = calc_vo2(distance).vo2max2
+                                      var pace_LT_raw = 60*24*60*(1/(29.54 + 5.000663 * (vo2max*0.88) - 0.007546 * Math.pow(vo2max*0.88,2))*1609.344/1440)/1.609344;
+                                      var dummy_kms = 5;
+                                      var dummy_pace = calculate_pure(dummy_kms*1000)/dummy_kms;
+                                      while (dummy_pace < pace_LT_raw) {
+                                        var dummy_pace = calculate_pure(dummy_kms*1000)/dummy_kms
+                                        dummy_kms++
+                                      }
+                                      var dummy_distance = (dummy_kms - 2) * 1000
+                                      var dummy_pace = calculate_pure(dummy_distance)*1000/dummy_distance
+                                      while (dummy_pace < pace_LT_raw) {
+                                        var dummy_pace = calculate_pure(dummy_distance)*1000/dummy_distance
+                                        dummy_distance++
+                                      }
+                                      var distance_LT = dummy_distance
+                                      return distance_LT
+                                  }
+    function calc_distance_vo2max(distance) {
+                                      var vo2max = calc_vo2(distance).vo2max2
+                                      var dummy_kms = 2;
+                                      var dummy_vo2 = calc_vo2(dummy_kms*1000).vo22;
+                                      while (dummy_vo2 > vo2max) {
+                                        var dummy_vo2 = calc_vo2(dummy_kms*1000).vo22
+                                        dummy_kms++
+                                      }
+                                      var dummy_distance = (dummy_kms - 2) * 1000
+                                      var dummy_vo2 = calc_vo2(dummy_distance).vo22
+                                      while (dummy_vo2 > vo2max) {
+                                        var dummy_vo2 = calc_vo2(dummy_distance).vo22
+                                        dummy_distance++
+                                      }
+                                      var distance_vo2max = dummy_distance
+                                      return distance_vo2max
                                   }
 
     function calc_speed(distance) {
@@ -99,6 +144,68 @@
                                       var speed = distance_km / time_hours;
                                       return speed.toFixed(2);
                                   }
+    function note(distance) {
+                                      var note = "<br>"
+                                      if(distance == distance_LT) {
+                                        note = "Lactate Threshold"
+                                      } else if(distance == distance_vo2max) {
+                                        note = "VO2max"
+                                      } else if(distance == dummy_distance) {
+                                        note = "Functional Threshold"
+                                      } else if(distance == tempo_max_distance) {
+                                        note = tempodistance + "m Tempo Pace"
+                                      } else if(distance == 21097.494) {
+                                        note = "Half Marathon Pace"
+                                      } else if(distance == 42194.988) {
+                                        note = "Marathon Pace"
+                                      } else {
+                                        note = "<br>"
+                                      }
+                                      return note
+                            }
+    function interpolate(x, xArray, yArray) {
+                                      // Ensure inputs are valid
+                                      if (xArray.length !== yArray.length || xArray.length < 2) {
+                                          throw new Error("xArray and yArray must have the same length and contain at least two elements.");
+                                      }
+
+                                      // Find the interval [x1, x2] such that x1 <= x <= x2
+                                      for (let i = 0; i < xArray.length - 1; i++) {
+                                          if (x >= xArray[i] && x <= xArray[i + 1]) {
+                                              const x1 = xArray[i], x2 = xArray[i + 1];
+                                              const y1 = yArray[i], y2 = yArray[i + 1];
+
+                                              // Perform linear interpolation
+                                              return y1 + ((y2 - y1) * (x - x1)) / (x2 - x1);
+                                          }
+                                      }
+                                      // If x is outside the range of xArray, throw an error or return a default value
+                                      throw new Error("x is outside the range of xArray.");
+                                    }
+
+    function calc_tempo_max_distance(tempo_distance) {
+                                      var minutes_array = [0,20,25,30,35,40,45,50,55,60,240]
+                                      var factor_array = [0.98,1.000,1.012,1.022,1.027,1.033,1.038,1.043,1.049,1.055,1.286]
+                                      var pace_LT_raw = calculate_pure(distance_LT) * 1000 / distance_LT
+                                      var pace_array_raw = factor_array.map(element => element*pace_LT_raw)
+                                      var distance_array = minutes_array.map((element, index) => element * 60 * 1000 / pace_array_raw[index])
+                                      var tempo_pace_raw = interpolate(tempo_distance, distance_array, pace_array_raw)
+                                      var dummy_kms = tempo_distance/1000;
+                                      var dummy_pace = calculate_pure(dummy_kms*1000)/dummy_kms;
+                                      while (dummy_pace < tempo_pace_raw) {
+                                        var dummy_pace = calculate_pure(dummy_kms*1000)/dummy_kms
+                                        dummy_kms++
+                                      }
+                                      var dummy_distance = (dummy_kms - 2) * 1000
+                                      var dummy_pace = calculate_pure(dummy_distance)*1000/dummy_distance
+                                      while (dummy_pace < tempo_pace_raw) {
+                                        var dummy_pace = calculate_pure(dummy_distance)*1000/dummy_distance
+                                        dummy_distance++
+                                      }
+                                      var tempo_max_distance = dummy_distance
+                                      return tempo_max_distance
+                                      }
+
   </script>
   <script src="./Pheidippidies&#39; Bane&#39;s Time Calculator_files/chart.js.download"></script>
   <script src="./Pheidippidies&#39; Bane&#39;s Time Calculator_files/moment.min.js.download"></script>
@@ -107,7 +214,7 @@
   <script src="./Pheidippidies&#39; Bane&#39;s Time Calculator_files/jquery.transform2d.js.download"></script>
   <script>
 
-var distancelist = [1500,1609,3000,5000,10000,21097,42195];
+var distancelist = [1500,1609,3000,5000,10000,21097.494,42194.988];
 function addDistance() {
 var extraDistance = Number(document.getElementById("extraDistance").value)
 distancelist.push(extraDistance)
@@ -122,14 +229,22 @@ while (dummy_time < 3600) {
   var dummy_time = calculate_pure(dummy_kms*1000)
   dummy_kms++
 }
-var dummy_distance = (dummy_kms - 2) * 1000
+dummy_distance = (dummy_kms - 2) * 1000
 var dummy_time = calculate_pure(dummy_distance)
 while (dummy_time < 3600) {
   var dummy_time = calculate_pure(dummy_distance)
   dummy_distance++
 }
+tempodistance = Number(document.getElementById("tempodistance").value)
+//window.alert(Number.parseFloat(tempodistance))
+distance_LT = calc_distance_LT(dummy_distance)
+tempo_max_distance = calc_tempo_max_distance(tempodistance)
+distance_vo2max = calc_distance_vo2max(dummy_distance)
 var locdistancelist = distancelist.slice()
+locdistancelist.push(tempo_max_distance)
 locdistancelist.push(dummy_distance)
+locdistancelist.push(distance_LT)
+locdistancelist.push(distance_vo2max)
 locdistancelist.sort(function(a, b){return a-b})
                                     }
 var html1 = `
@@ -159,7 +274,7 @@ for (distance of locdistancelist) {
     <table>
         <thead>
             <tr>
-                <td nowrap="nowrap">Pace (mm:ss per k)</td>
+                <td nowrap="nowrap">Pace (per km)</td>
             </tr>
         </thead>
         <tbody>
@@ -179,7 +294,27 @@ for (distance of locdistancelist) {
     <table>
         <thead>
             <tr>
-                <td nowrap="nowrap">Time (HH:mm:ss)</td>
+                <td nowrap="nowrap">Pace (per mile)</td>
+            </tr>
+        </thead>
+        <tbody>
+        `
+
+for (distance of locdistancelist) {
+  html1 += `
+            <tr>
+                <td>${calc_pace_mile(distance)}</td>
+                `
+}
+  html1 +=  `</tr>
+        </tbody>
+    </table>
+</td>
+<td>
+    <table>
+        <thead>
+            <tr>
+                <td nowrap="nowrap">Total Time</td>
             </tr>
         </thead>
         <tbody>
@@ -208,7 +343,7 @@ for (distance of locdistancelist) {
 for (distance of locdistancelist) {
   html1 += `
             <tr>
-                <td>${Number.parseFloat(calc_vo2(distance).vo22).toPrecision(3)}</td>
+                <td>${calc_vo2_clean(distance).vo2_clean}</td>
                 `
 }
   html1 +=  `</tr>
@@ -219,7 +354,7 @@ for (distance of locdistancelist) {
     <table>
         <thead>
             <tr>
-                <td nowrap="nowrap">Percent V02max</td>
+                <td nowrap="nowrap">% V02max</td>
             </tr>
         </thead>
         <tbody>
@@ -228,7 +363,7 @@ for (distance of locdistancelist) {
 for (distance of locdistancelist) {
   html1 += `
             <tr>
-                <td>${Number.parseFloat(calc_vo2(distance).percent_max2).toPrecision(3)}</td>
+                <td>${calc_vo2_clean(distance).percent_max_clean}</td>
                 `
 }
   html1 +=  `</tr>
@@ -255,6 +390,26 @@ for (distance of locdistancelist) {
         </tbody>
     </table>
 </td>
+<td>
+    <table>
+        <thead>
+            <tr>
+                <td nowrap="nowrap">Note</td>
+            </tr>
+        </thead>
+        <tbody>
+        `
+
+for (distance of locdistancelist) {
+  html1 += `
+            <tr>
+                <td>${note(distance)}</td>
+                `
+}
+  html1 +=  `</tr>
+        </tbody>
+    </table>
+</td>
 </table>`
 
 
@@ -263,6 +418,7 @@ document.getElementById("extraRow2").innerHTML = html1
 $("#canvaswrap").html("").html('<canvas id="myChart"></canvas>');
 var timelist = locdistancelist.map(calculate)
 var pacelist = locdistancelist.map(calc_pace)
+var pacelistmile = locdistancelist.map(calc_pace_mile)
 var canvas = document.getElementById("myChart");
 var ctx = canvas.getContext("2d");
 var config = {
@@ -320,7 +476,7 @@ String.prototype.toMMSS = function () {
     var seconds = (sec_num - (hours * 3600) - (minutes * 60)).toFixed(1);
 
     if (hours   < 10) {hours   = "0"+hours;}
-    if (minutes < 10) {minutes = "0"+minutes;}
+    if (minutes < 10) {minutes = minutes;}
     if (seconds < 10) {seconds = "0"+seconds;}
     return minutes+':'+seconds;
 }
@@ -336,26 +492,21 @@ function RoundNum(num, length) {
   <br>
   <div>
     <p>
-      Use this tool to predict race times and paces using a number of well known methods.
+      <b>Welcome to Pheidippides' Bane's Running Calculator.</b>
     </p>
     <p>
-      Note that the distance/pace given for 1-hour time corresponds to estimated lactate threshold.
+      VO2max pace, VO2max, VO2, Lactate Threshold and Tempo Pace are calculated in accordance with Jack Daniels' Running Formula.
     </p>
   </div>
-  <br>
-  <select id="method" onchange="addrow()" style="width:40%">
-    <option value="vdot">VDOT (Jack Daniels)</option>
+  <select id="method" onchange="addrow()" style="width:20%">
     <!--<option value="kellog">Kellog</option> -->
+    <option value="vdot">VDOT (Jack Daniels)</option>
     <option value="onepoint">One Point</option>
     <option value="twopoint">Two Point</option>
-  </select>
-  <br>
-  <br>
-  <input type="number" min="0" style="width:15%" id="extraDistance"> <button onclick="addDistance()">Add Distance</button>
-  <br>
+  </select> Conversion Method (note: VDOT takes a few seconds to calculate on each change).
   <br>
   <div id="inputs" class="container">
-  <input id="distance1" list="distances1" name="distance1" placeholder="Number of Metres (w/o units) or select" style="width:30%" onchange="chart()">
+  <input id="distance1" list="distances1" name="distance1" placeholder="Number of Metres (w/o units) or select" style="width:20%" onchange="chart()">
   <datalist id="distances1">
     <option value="400">400m</option>
     <option value="800">800m</option>
@@ -367,13 +518,17 @@ function RoundNum(num, length) {
     <option value="5000">5000m</option>
     <option value="10000">10000m</option>
     <option value="21097.494">half-marathon</option>
-    <option value="42195.0">marathon</option>
+    <option value="42194.988">marathon</option>
   </datalist>
-  <input type="number" min="0" style="width:15%" id="time1a" onchange="chart()"> min <input type="number" min="0" step="1" style="width:20%" id="time1b" onchange="chart()"> sec
+  <input type="number" min="0" style="width:10%" id="time1a" onchange="chart()"> min <input type="number" min="0" step="1" style="width:10%" id="time1b" onchange="chart()"> sec
   <br>
   </div>
   <div id="extraRow" class="display" onchange="chart()">
   </div>
+  <br>
+  <input id="tempodistance" min = "1000" type = "number" step = "1" name="tempodistance" value=10000 style="width:10%" onchange="chart()"> Tempo Distance (m)
+  <br>
+  <input type="number" min="0" style="width:10%" id="extraDistance" placeholder="Custom Distance"> <button onclick="addDistance()">Add Distance</button>
   <div id="extraRow2" class="display" onchange="chart()">
   </div>
   <div id="canvaswrap" style="width:50%">
