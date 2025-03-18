@@ -11,7 +11,7 @@
       if (document.getElementById("method").value == "onepoint") {
       document.getElementById("extraRow").innerHTML ="Expontial Factor <input type='number' min='1' id = 'exponentialFactor' step='.001' name='exponentialFactor' value='1.06' />"
     } else if (document.getElementById("method").value == "twopoint") {
-      document.getElementById("extraRow").innerHTML = "<input id = 'distance2' list='distances2' name='distance2' placeholder='Number of Metres (w/o units) or select' style='width:20%'/> <datalist id='distances2'> <option value='400'>400m</option> <option value='800'>800m</option> <option value='1000'>1000m</option> <option value='1500'>1500m</option> <option value='1609'>1-mile</option> <option value='3000'>3000m</option> <option value='3218'>2-mile</option> <option value='5000'>5000m</option> <option value='10000'>10000m</option> <option value='21097.494'>half-marathon</option> <option value='42194.988'>marathon</option> </datalist> <input type='number' min='0' style='width:10%' id='time2a' /> min <input type='number' min='0' step='1' style='width:10%' id='time2b' /> sec<br>";
+      document.getElementById("extraRow").innerHTML = "<input id = 'distance2' list='distances2' name='distance2' placeholder='Number of Metres (w/o units) or select' style='width:20%'/> <datalist id='distances2'> <option value='400'>400m</option> <option value='800'>800m</option> <option value='1000'>1000m</option> <option value='1500'>1500m</option> <option value='1609.344'>1-mile</option> <option value='3000'>3000m</option> <option value='3218'>2-mile</option> <option value='5000'>5000m</option> <option value='10000'>10000m</option> <option value='21097.494'>half-marathon</option> <option value='42194.988'>marathon</option> </datalist> <input type='number' min='0' style='width:10%' id='time2a' /> min <input type='number' min='0' step='1' style='width:10%' id='time2b' /> sec<br>";
     } else if (document.getElementById("method").value == "vdot") {
       document.getElementById("extraRow").innerHTML = ""
     }
@@ -262,7 +262,7 @@
   <script src="./Pheidippidies&#39; Bane&#39;s Time Calculator_files/jquery.transform2d.js.download"></script>
   <script>
 
-var distancelist = [1500,1609,3000,5000,10000,21097.494,42194.988];
+var distancelist = [1500,1609.344,3000,5000,10000,21097.494,42194.988];
 function addDistance() {
 var extraDistance = Number(document.getElementById("extraDistance").value)
 distancelist.push(extraDistance)
@@ -560,7 +560,7 @@ function RoundNum(num, length) {
     <option value="800">800m</option>
     <option value="1000">1000m</option>
     <option value="1500">1500m</option>
-    <option value="1609">1-mile</option>
+    <option value="1609.344">1-mile</option>
     <option value="3000">3000m</option>
     <option value="3218">2-mile</option>
     <option value="5000">5000m</option>
@@ -574,14 +574,377 @@ function RoundNum(num, length) {
   <div id="extraRow" class="display" onchange="chart()">
   </div>
   <br>
-  <input id="tempodistance" min = "1000" type = "number" step = "1" name="tempodistance" value=10000 style="width:10%" onchange="chart()"> Tempo Distance (m)
+  <input id="tempodistance" min="1000" type="number" step="1" name="tempodistance" value="10000" style="width:10%" onchange="chart()"> Tempo Distance (m)
   <br>
   <input type="number" min="0" style="width:10%" id="extraDistance" placeholder="Custom Distance"> <button onclick="addDistance()">Add Distance</button>
   <div id="extraRow2" class="display" onchange="chart()">
-  </div>
+<table>
+<tbody><tr>
+<td>
+    <table>
+        <thead>
+            <tr>
+                <td nowrap="nowrap">Distance (m)</td>
+            </tr>
+        </thead>
+        <tbody>
+
+            <tr>
+                <td>1500</td>
+                
+            </tr><tr>
+                <td>1609.344</td>
+                
+            </tr><tr>
+                <td>3000</td>
+                
+            </tr><tr>
+                <td>3986</td>
+                
+            </tr><tr>
+                <td>5000</td>
+                
+            </tr><tr>
+                <td>10000</td>
+                
+            </tr><tr>
+                <td>19644</td>
+                
+            </tr><tr>
+                <td>21097.494</td>
+                
+            </tr><tr>
+                <td>21742</td>
+                
+            </tr><tr>
+                <td>41661</td>
+                
+            </tr><tr>
+                <td>42194.988</td>
+                </tr>
+        </tbody>
+    </table>
+</td>
+<td>
+    <table>
+        <thead>
+            <tr>
+                <td nowrap="nowrap">Pace (per km)</td>
+            </tr>
+        </thead>
+        <tbody>
+        
+            <tr>
+                <td>2:31.5</td>
+                
+            </tr><tr>
+                <td>2:32.5</td>
+                
+            </tr><tr>
+                <td>2:42.2</td>
+                
+            </tr><tr>
+                <td>2:46.5</td>
+                
+            </tr><tr>
+                <td>2:49.6</td>
+                
+            </tr><tr>
+                <td>2:56.4</td>
+                
+            </tr><tr>
+                <td>3:03.3</td>
+                
+            </tr><tr>
+                <td>3:04.1</td>
+                
+            </tr><tr>
+                <td>3:04.5</td>
+                
+            </tr><tr>
+                <td>3:12.8</td>
+                
+            </tr><tr>
+                <td>3:12.9</td>
+                </tr>
+        </tbody>
+    </table>
+</td>
+<td>
+    <table>
+        <thead>
+            <tr>
+                <td nowrap="nowrap">Pace (per mile)</td>
+            </tr>
+        </thead>
+        <tbody>
+        
+            <tr>
+                <td>4:03.8</td>
+                
+            </tr><tr>
+                <td>4:05.4</td>
+                
+            </tr><tr>
+                <td>4:21.0</td>
+                
+            </tr><tr>
+                <td>4:28.0</td>
+                
+            </tr><tr>
+                <td>4:32.9</td>
+                
+            </tr><tr>
+                <td>4:43.9</td>
+                
+            </tr><tr>
+                <td>4:55.0</td>
+                
+            </tr><tr>
+                <td>4:56.4</td>
+                
+            </tr><tr>
+                <td>4:57.0</td>
+                
+            </tr><tr>
+                <td>5:10.2</td>
+                
+            </tr><tr>
+                <td>5:10.5</td>
+                </tr>
+        </tbody>
+    </table>
+</td>
+<td>
+    <table>
+        <thead>
+            <tr>
+                <td nowrap="nowrap">Total Time</td>
+            </tr>
+        </thead>
+        <tbody>
+        
+            <tr>
+                <td>03:47</td>
+                
+            </tr><tr>
+                <td>04:05</td>
+                
+            </tr><tr>
+                <td>08:06</td>
+                
+            </tr><tr>
+                <td>11:04</td>
+                
+            </tr><tr>
+                <td>14:08</td>
+                
+            </tr><tr>
+                <td>29:24</td>
+                
+            </tr><tr>
+                <td>1:00:00</td>
+                
+            </tr><tr>
+                <td>1:04:45</td>
+                
+            </tr><tr>
+                <td>1:06:52</td>
+                
+            </tr><tr>
+                <td>2:13:51</td>
+                
+            </tr><tr>
+                <td>2:15:40</td>
+                </tr>
+        </tbody>
+    </table>
+</td>
+<td>
+    <table>
+        <thead>
+            <tr>
+                <td nowrap="nowrap">V02 (mL/kg/min)</td>
+            </tr>
+        </thead>
+        <tbody>
+        
+            <tr>
+                <td><br></td>
+                
+            </tr><tr>
+                <td><br></td>
+                
+            </tr><tr>
+                <td><br></td>
+                
+            </tr><tr>
+                <td>74.6</td>
+                
+            </tr><tr>
+                <td>72.9</td>
+                
+            </tr><tr>
+                <td>69.4</td>
+                
+            </tr><tr>
+                <td>66.2</td>
+                
+            </tr><tr>
+                <td>65.8</td>
+                
+            </tr><tr>
+                <td>65.7</td>
+                
+            </tr><tr>
+                <td>62.2</td>
+                
+            </tr><tr>
+                <td>62.1</td>
+                </tr>
+        </tbody>
+    </table>
+</td>
+<td>
+    <table>
+        <thead>
+            <tr>
+                <td nowrap="nowrap">% V02max</td>
+            </tr>
+        </thead>
+        <tbody>
+        
+            <tr>
+                <td><br></td>
+                
+            </tr><tr>
+                <td><br></td>
+                
+            </tr><tr>
+                <td><br></td>
+                
+            </tr><tr>
+                <td>100</td>
+                
+            </tr><tr>
+                <td>97.8</td>
+                
+            </tr><tr>
+                <td>93.1</td>
+                
+            </tr><tr>
+                <td>88.8</td>
+                
+            </tr><tr>
+                <td>88.3</td>
+                
+            </tr><tr>
+                <td>88.1</td>
+                
+            </tr><tr>
+                <td>83.4</td>
+                
+            </tr><tr>
+                <td>83.3</td>
+                </tr>
+        </tbody>
+    </table>
+</td>
+<td>
+    <table>
+        <thead>
+            <tr>
+                <td nowrap="nowrap">Speed (km/h)</td>
+            </tr>
+        </thead>
+        <tbody>
+        
+            <tr>
+                <td>23.77</td>
+                
+            </tr><tr>
+                <td>23.61</td>
+                
+            </tr><tr>
+                <td>22.20</td>
+                
+            </tr><tr>
+                <td>21.62</td>
+                
+            </tr><tr>
+                <td>21.23</td>
+                
+            </tr><tr>
+                <td>20.41</td>
+                
+            </tr><tr>
+                <td>19.64</td>
+                
+            </tr><tr>
+                <td>19.55</td>
+                
+            </tr><tr>
+                <td>19.51</td>
+                
+            </tr><tr>
+                <td>18.68</td>
+                
+            </tr><tr>
+                <td>18.66</td>
+                </tr>
+        </tbody>
+    </table>
+</td>
+<td>
+    <table>
+        <thead>
+            <tr>
+                <td nowrap="nowrap">Note</td>
+            </tr>
+        </thead>
+        <tbody>
+        
+            <tr>
+                <td><br></td>
+                
+            </tr><tr>
+                <td><br></td>
+                
+            </tr><tr>
+                <td><br></td>
+                
+            </tr><tr>
+                <td>VO2max</td>
+                
+            </tr><tr>
+                <td><br></td>
+                
+            </tr><tr>
+                <td><br></td>
+                
+            </tr><tr>
+                <td>FunctionalThreshold</td>
+                
+            </tr><tr>
+                <td>HalfMarathonPace</td>
+                
+            </tr><tr>
+                <td>LactateThreshold</td>
+                
+            </tr><tr>
+                <td>16000mTempoPace</td>
+                
+            </tr><tr>
+                <td>MarathonPace</td>
+                </tr>
+        </tbody>
+    </table>
+</td>
+</tr></tbody></table></div>
   <div id="canvaswrap" style="width:50%">
   <canvas id="myChart"></canvas>
   </div>
+
 
 
 
