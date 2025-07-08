@@ -27,15 +27,30 @@ _(none of this should be taken as investment advice)_
 - [Smooth Particle Hydrodynamics Literature Review](./Smooth_Particle_Hydrodynamics.pdf) _- 14th December 2018_
 - [Big Chainrings](./chainring.html) _- 30th May 2021_
 
+### _Mountains_ 
+
+- [ICXC Trail Trip Chamonix 2018](https://www.youtube.com/watch?v=dYFXAbkSJeE&t=311s&ab_channel=ICXCTrailChannel) _- July 2018_
+- [ICXC Trail Trip Chamonix 2019](https://www.youtube.com/watch?v=f9EaFMqZ_70&t=35s&ab_channel=ICXCTrailChannel) _- July 2019_
+- [ICXC Trail Trip Dolomites 2020](https://drive.google.com/file/d/13V1kufwfpMdlMHk57djtVkmoa-7FP3Yj/view?usp=sharing) _- September 2020_
+- [Trois Monts Report](./Mont_Blanc_3_Monts_Report.pdf) & [Video](https://www.youtube.com/watch?v=00GsWVofAOg&fbclid=IwAR01576IabQFfcu9wyty4LUuxUqmqIjRXuaiyuKoi6tV5gIImYcL-SMNLnc&ab_channel=ICXCTrailChannel)
+
+### _Races_
+
+- [Power of 10](https://www.thepowerof10.info/athletes/profile.aspx?athleteid=536246)
+- [Frankfurt Marathon Report](./Account.pdf) _- 29th October 2023_
+- [Berlin Marathon Report](./Berlin_Report.pdf) _- 29th September 2024_
+- [British 100k Champion Interview with Adrian Stott](https://runnersaresmilers.com/henry-hartuk-100km-champion/) _- 8th May 2025_
+- [British 100k Champion Interview with Young Hearts Run Free](https://www.youtube.com/watch?v=CYx-RRxBQ5w&ab_channel=youngheartsrunfreepodcast) _- 19th May 2025_
+- [14:08 5k PB](https://www.youtube.com/watch?v=C3FiRMAD73k&list=LL&index=19&ab_channel=FridayNightUndertheLights) _- 27th February 2025_
+- [Brisley v Hart](https://www.youtube.com/watch?v=499D4wFX5x8&ab_channel=FridayNightUndertheLights) _- 26th April 2025_
+
 ### _Other_ 
 
 - [HTML & JS Running Calculator](./runcalc.html) _- 8th July 2021_
 - [Cycling Time Trial Pacing Optimiser](./pacingcalc.html) _- 6th September 2021_
 - [Statistical Modelling](./StatsHart01190775.pdf) _- 9th March 2020_
-- [Power of 10](https://www.thepowerof10.info/athletes/profile.aspx?athleteid=536246)
-- [Trois Monts Report](./Mont_Blanc_3_Monts_Report.pdf) & [Video](https://www.youtube.com/watch?v=00GsWVofAOg&fbclid=IwAR01576IabQFfcu9wyty4LUuxUqmqIjRXuaiyuKoi6tV5gIImYcL-SMNLnc&ab_channel=ICXCTrailChannel)
-- [Frankfurt Marathon Report](./Account.pdf) _- 29th October 2023_
-- [Berlin Marathon Report](./Berlin_Report.pdf) _- 29th September 2024_
+- [Chasing Pace Biopic](https://www.youtube.com/watch?v=r6IH_DL9Xak&list=LL&index=54&ab_channel=ChasingPace) _- 28th September 2024_
+- [Gel Recipe](./HH20250707.pdf) _- 7th July 2025_
 - [Running Shoe Blog](http://runshoereviews.blogspot.com/?m=1) _- 10th January 2016_
 
 
