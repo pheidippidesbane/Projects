@@ -1,0 +1,118 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Quarter-Second QR Cycler (10000000 → 10199999)</title>
+  <meta name="description" content="Generates a new QR code every 250ms cycling through 8-digit numbers starting with '10' from 10000000 to 10199999." />
+  <style>
+    :root { font-family: system-ui, -apple-system, Segoe UI, Roboto, sans-serif; }
+    body { margin: 0; padding: 2rem; display: grid; place-items: center; gap: 1rem; }
+    .wrap { display: grid; gap: 1rem; justify-items: center; }
+    #qr { width: 256px; height: 256px; }
+    .num { font-size: 2rem; letter-spacing: 0.08em; font-variant-numeric: tabular-nums; }
+    .meta { color: #555; font-size: .9rem; text-align: center; }
+    button { padding: .5rem .9rem; border-radius: .6rem; border: 1px solid #ccc; background: #f7f7f7; cursor: pointer; }
+    button:hover { background: #efefef; }
+    .controls { display: flex; gap: .5rem; flex-wrap: wrap; justify-content: center; }
+  </style>
+  <!-- Lightweight QR code generator -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js" integrity="sha512-MnR4D9Y9a2H+1g7qYg9b8k2oS4E2RewzQd2nA9g9gq8lQH1V2pQnS0JmCqHc5u7kq3m8n+8x8VvS2jcQx+3C1A==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+</head>
+<body>
+  <div class="wrap">
+    <div id="qr" aria-label="QR code"></div>
+    <div class="num" id="value" aria-live="polite">10000000</div>
+    <div class="meta">
+      Updates every 250 ms • Range: 10000000 to 10199999 (200,000 values) • Full cycle ≈ 13.9 hours
+    </div>
+    <div class="controls">
+      <button id="pauseBtn" type="button">Pause</button>
+      <button id="resumeBtn" type="button" disabled>Resume</button>
+      <button id="resetBtn" type="button">Reset to 10000000</button>
+    </div>
+  </div>
+
+  <script>
+    (function () {
+      // Range configuration
+      const START = 10000000;
+      const END   = 10199999; // inclusive
+      const INTERVAL_MS = 250;
+
+      // Elements
+      const qrEl = document.getElementById('qr');
+      const valueEl = document.getElementById('value');
+      const pauseBtn = document.getElementById('pauseBtn');
+      const resumeBtn = document.getElementById('resumeBtn');
+      const resetBtn = document.getElementById('resetBtn');
+
+      // Create QRCode instance once; update with makeCode(str)
+      const qr = new QRCode(qrEl, {
+        text: String(START),
+        width: 256,
+        height: 256,
+        correctLevel: QRCode.CorrectLevel.M
+      });
+
+      let current = START;
+      let timerId = null;
+
+      function setNumber(n) {
+        const str = n.toString().padStart(8, '0'); // always 8 digits
+        valueEl.textContent = str;
+        // Update QR
+        qr.makeCode(str);
+      }
+
+      function tick() {
+        // Advance and wrap
+        if (current > END) current = START;
+        setNumber(current);
+        current++;
+      }
+
+      function start() {
+        if (timerId !== null) return;
+        timerId = setInterval(tick, INTERVAL_MS);
+      }
+
+      function pause() {
+        if (timerId !== null) {
+          clearInterval(timerId);
+          timerId = null;
+        }
+      }
+
+      // Controls
+      pauseBtn.addEventListener('click', () => {
+        pause();
+        pauseBtn.disabled = true;
+        resumeBtn.disabled = false;
+      });
+
+      resumeBtn.addEventListener('click', () => {
+        start();
+        pauseBtn.disabled = false;
+        resumeBtn.disabled = true;
+      });
+
+      resetBtn.addEventListener('click', () => {
+        current = START;
+        setNumber(current);
+      });
+
+      // Initialize
+      setNumber(current);
+      start();
+
+      // Optional: improve timer stability on hidden tabs by re-starting on visibility change
+      document.addEventListener('visibilitychange', () => {
+        if (document.visibilityState === 'visible' && timerId === null && resumeBtn.disabled) {
+          start();
+        }
+      });
+    })();
+  </script>
+</body>
+</html>
