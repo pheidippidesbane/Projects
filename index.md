@@ -47,6 +47,7 @@ _(none of this should be taken as investment advice)_
 ### _Other_ 
 
 - [HTML & JS Running Calculator](./runcalc.html) _- 8th July 2021_
+- [Po10 Tool](./Po10_Tool.html) _- 2nd September 2025_
 - [Cycling Time Trial Pacing Optimiser](./pacingcalc.html) _- 6th September 2021_
 - [Statistical Modelling](./StatsHart01190775.pdf) _- 9th March 2020_
 - [Chasing Pace Biopic](https://www.youtube.com/watch?v=r6IH_DL9Xak&list=LL&index=54&ab_channel=ChasingPace) _- 28th September 2024_
