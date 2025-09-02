@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Infer Date of Birth from Race Table</title>
+<style>
+body { font-family: Arial, sans-serif; margin: 20px; }
+label { display: block; margin-bottom: 10px; }
+button { margin-top: 10px; padding: 6px 12px; }
+#output { margin-top: 20px; font-weight: bold; }
+textarea { width: 100%; margin-top: 10px; }
+.instructions { background: #f0f0f0; padding: 10px; border-radius: 5px; margin-bottom: 20px; }
+</style>
+</head>
+<body>
+
+<h2>Infer Date of Birth from Race Results</h2>
+
+<div class="instructions">
+<strong>Instructions:</strong>
+<ol>
+  <li>Navigate to the athlete's Power of 10 page.</li>
+  <li>Change the Performances table selection "View By" to "Age Graded".</li>
+  <li>View page source (usually right-click → View Page Source).</li>
+  <li>Copy the HTML of the Performances table element (the &lt;table&gt; element) into the box below.</li>
+</ol>
+</div>
+
+<label>
+Paste the Performances table HTML element here:
+<textarea id="htmlInput" rows="15" placeholder="Paste the table HTML here"></textarea>
+</label><br>
+<button onclick="processHTML()">Infer DOB from pasted HTML</button>
+
+<div id="output"></div>
+
+<script>
+// Parse dates like "27 Feb 25"
+function parseDate(dateStr) {
+  const parts = dateStr.trim().split(" ");
+  if (parts.length !== 3) return null;
+  const day = parseInt(parts[0],10);
+  const monthStr = parts[1].toLowerCase();
+  const year = parseInt(parts[2],10);
+  const months = {jan:0,feb:1,mar:2,apr:3,may:4,jun:5,jul:6,aug:7,sep:8,oct:9,nov:10,dec:11};
+  const month = months[monthStr.slice(0,3)];
+  if (isNaN(day) || month===undefined || isNaN(year)) return null;
+  const fullYear = year < 50 ? 2000 + year : 1900 + year;
+  return new Date(fullYear, month, day);
+}
+
+// Automatically find the table with Points/Age/Date headers
+function findRelevantTable(doc) {
+  const tables = Array.from(doc.querySelectorAll("table"));
+  let bestMatch = null;
+  let bestScore = 0;
+
+  const requiredHeaders = ["points","age","date"];
+
+  tables.forEach(table => {
+    const headerCells = Array.from(table.querySelectorAll("tr:first-child th, tr:first-child td"))
+      .map(td => td.textContent.trim().toLowerCase());
+    const score = requiredHeaders.reduce((s, h) => s + (headerCells.includes(h) ? 1 : 0), 0);
+    if (score > bestScore) {
+      bestScore = score;
+      bestMatch = table;
+    }
+  });
+
+  return bestMatch;
+}
+
+// Main DOB inference function
+function inferDOB(doc) {
+  const output = document.getElementById('output');
+
+  const targetTable = findRelevantTable(doc);
+  if (!targetTable) { output.textContent = "No suitable table with Points/Age/Date headers found."; return; }
+
+  // Extract age/date data
+  const rows = Array.from(targetTable.querySelectorAll("tr")).slice(1);
+  const data = [];
+  rows.forEach(row => {
+    const cells = row.querySelectorAll("td");
+    if (cells.length > 8) {
+      const ageText = cells[8]?.textContent.trim();
+      const dateText = cells[cells.length-1]?.textContent.trim();
+      const age = parseInt(ageText,10);
+      const date = parseDate(dateText);
+      if (!isNaN(age) && date) data.push({age,date});
+    }
+  });
+
+  if (data.length === 0) { output.textContent = "No valid age/date pairs found."; return; }
+
+  // Compute DOB ranges for each record
+  const dobRanges = data.map(d => {
+    const lower = new Date(d.date); lower.setFullYear(lower.getFullYear()-(d.age+1)); lower.setDate(lower.getDate()+1);
+    const upper = new Date(d.date); upper.setFullYear(upper.getFullYear()-d.age);
+    return {lower, upper};
+  });
+
+  // Intersection of all ranges
+  const finalLower = dobRanges.reduce((max,r) => r.lower > max ? r.lower : max, dobRanges[0].lower);
+  const finalUpper = dobRanges.reduce((min,r) => r.upper < min ? r.upper : min, dobRanges[0].upper);
+
+  output.innerHTML = `
+    <strong>Narrowed DOB Range based on all records:</strong><br>
+    Between ${finalLower.toDateString()} and ${finalUpper.toDateString()}<br>
+    <br>
+    Records used: ${data.length} entries
+  `;
+}
+
+// Process pasted HTML
+function processHTML() {
+  const html = document.getElementById('htmlInput').value;
+  if (!html.trim()) { document.getElementById('output').textContent = "No HTML provided."; return; }
+  const parser = new DOMParser();
+  const doc = parser.parseFromString(html,'text/html');
+  inferDOB(doc);
+}
+</script>
+
+</body>
+</html>
