@@ -23,6 +23,7 @@ textarea { width: 100%; margin-top: 10px; }
   <li>Change the Performances table selection "View By" to "Age Graded".</li>
   <li>View page source (usually right-click → View Page Source).</li>
   <li>Copy the HTML of the Performances table element (the &lt;table&gt; element) into the box below.</li>
+  <li>Use <a href="https://ea-registration-check.myathletics.uk/" target="_blank">England Athletics Registration Check</a> to confirm the exact Date of Birth.</li>
 </ol>
 </div>
 
@@ -70,6 +71,16 @@ function findRelevantTable(doc) {
   return bestMatch;
 }
 
+// Compute current age given a DOB
+function calculateAge(dob, today=new Date()) {
+  let age = today.getFullYear() - dob.getFullYear();
+  const m = today.getMonth() - dob.getMonth();
+  if (m < 0 || (m === 0 && today.getDate() < dob.getDate())) {
+    age--;
+  }
+  return age;
+}
+
 // Main DOB inference function
 function inferDOB(doc) {
   const output = document.getElementById('output');
@@ -104,9 +115,17 @@ function inferDOB(doc) {
   const finalLower = dobRanges.reduce((max,r) => r.lower > max ? r.lower : max, dobRanges[0].lower);
   const finalUpper = dobRanges.reduce((min,r) => r.upper < min ? r.upper : min, dobRanges[0].upper);
 
+  // Show estimated age today (based on both ends of range)
+  const today = new Date();
+  const minAge = calculateAge(finalUpper, today);
+  const maxAge = calculateAge(finalLower, today);
+
   output.innerHTML = `
     <strong>Narrowed DOB Range based on all records:</strong><br>
     Between ${finalLower.toDateString()} and ${finalUpper.toDateString()}<br>
+    <br>
+    <strong>Estimated Age Today:</strong><br>
+    Between ${minAge} and ${maxAge} years old<br>
     <br>
     Records used: ${data.length} entries
   `;
